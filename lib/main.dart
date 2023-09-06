@@ -84,7 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   textDirection: TextDirection.ltr,
                   children: [
                     Image.asset(_foodImgPathList[index%3], height: 80, width: 80,),
-                    const Subtotal()
+                    Subtotal(index: index)
                   ],
                 )
               ],
