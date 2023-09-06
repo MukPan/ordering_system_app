@@ -10,6 +10,8 @@ void main() {
   runApp(const ProviderScope(child: MyApp()));
 }
 
+
+//TODO: 最後までスクロール内容が表示されるようにする
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -49,49 +51,109 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: ListView.separated(
-        padding: const EdgeInsets.all(8),
-        itemCount: 10,
-        separatorBuilder: (BuildContext context, int index) => const Divider(),
-        itemBuilder: (BuildContext context, int index) {
-          return SizedBox(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween, // これで両端に寄せる
-              children: [
-                //左寄り
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  textDirection: TextDirection.ltr, //L→R 指定しないとツールでエラー
+      body: Stack( //Stack
+        alignment: AlignmentDirectional.bottomCenter,
+        children: [
+          ListView.separated(
+            padding: const EdgeInsets.all(8),
+            itemCount: 10,
+            separatorBuilder: (BuildContext context, int index) => const Divider(),
+            itemBuilder: (BuildContext context, int index) {
+              return SizedBox(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween, // これで両端に寄せる
                   children: [
-                    //1行目
-                    ItemName(index: index),
-                    //2行目以降
-                    if (index % 3 != 0) OptionName(index: index),
-                    if (index % 2 != 0) OptionName(index: index+1),
-                    if (index % 5 != 0) OptionName(index: index+2),
-                    OptionName(index: index+3),
-                    //カウンタ
-                    ItemCounter(index: index)
+                    //左寄り
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      textDirection: TextDirection.ltr, //L→R 指定しないとツールでエラー
+                      children: [
+                        //1行目
+                        ItemName(index: index),
+                        //2行目以降
+                        if (index % 3 != 0) OptionName(index: index),
+                        if (index % 2 != 0) OptionName(index: index+1),
+                        if (index % 5 != 0) OptionName(index: index+2),
+                        OptionName(index: index+3),
+                        //カウンタ
+                        ItemCounter(index: index)
 
 
+                      ],
+                    ),
+                    //右寄り
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.end, //center
+                      textDirection: TextDirection.ltr,
+                      children: [
+                        Image.asset(_foodImgPathList[index%3], height: 80, width: 80,),
+                        Subtotal(index: index)
+                      ],
+                    )
                   ],
                 ),
-                //右寄り
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.end, //center
-                  textDirection: TextDirection.ltr,
+              );
+            },
+          ),
+
+          //合計表示
+          Container(
+            height: 200,
+            padding: const EdgeInsets.all(20),
+            decoration: const BoxDecoration(
+                color: Colors.white,
+                border: Border(
+                    top: BorderSide(
+                      color: Colors.black,
+                    )
+                )
+            ),
+            child: Column(
+              // crossAxisAlignment: CrossAxisAlignment.spaceBetween,
+              children: [
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Image.asset(_foodImgPathList[index%3], height: 80, width: 80,),
-                    Subtotal(index: index)
+                    Text(
+                      "合計 3個",
+                      style: TextStyle(
+                          fontSize: 20
+                      ),
+                    ),
+                    Text(
+                      "1900円",
+                      style: TextStyle(
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold
+                      ),
+                    )
                   ],
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  height: 50,
+                  child: TextButton(
+                      onPressed: () {},
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(Colors.orange),
+                      ),
+                      child: const Text(
+                        "注文を確定する",
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      )
+                  ),
                 )
               ],
             ),
-          );
-        },
-      ),
+
+          )
+
+        ],
+      )
     );
   }
 }

@@ -13,7 +13,7 @@ class Subtotal extends HookConsumerWidget {
   final int index;
 
   ///値段
-  final int amount = math.Random().nextInt(150);
+  final int amount = math.Random().nextInt(150) * 10;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
