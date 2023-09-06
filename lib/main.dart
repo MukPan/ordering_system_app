@@ -1,14 +1,18 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import 'component/item_counter.dart';
+import 'component/item_name.dart';
+import 'component/option_name.dart';
+import 'component/subtotal.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -33,24 +37,14 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
+  static const List<String> _foodImgPathList = [
+    "images/food_karaage_cup.png",
+    "images/fastfood_potato.png",
+    "images/takoyaki_fune.png",
+  ];
+
   @override
   Widget build(BuildContext context) {
-    List<String> itemList = [
-      "唐揚げ",
-      "ポテト",
-      "たこ焼き",
-    ];
-
-    List<String> optionList = [
-      "マヨネーズ",
-      "ケチャップ",
-      "ケチャップ&マヨネーズ",
-      "塩",
-      "焼きチーズ",
-      "ソース",
-      "青のり",
-    ];
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -64,54 +58,34 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween, // これで両端に寄せる
               children: [
+                //左寄り
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   textDirection: TextDirection.ltr, //L→R 指定しないとツールでエラー
                   children: [
-                    //左寄り
-                    Text(
-                      itemList[index % 3],
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 25.0
-                      ),
-                    ),
+                    //1行目
+                    ItemName(index: index),
+                    //2行目以降
+                    if (index % 3 != 0) OptionName(index: index),
+                    if (index % 2 != 0) OptionName(index: index+1),
+                    if (index % 5 != 0) OptionName(index: index+2),
+                    OptionName(index: index+3),
+                    //カウンタ
+                    ItemCounter(index: index)
 
-                    //右寄り
-                    if (index % 3 != 0) Text(
-                      optionList[index % 7],
-                      style: const TextStyle(
-                        fontSize: 15.0,
-                        color: CupertinoColors.systemGrey
-                      ),
-                    ),
-                    if (index % 2 != 0) Text(
-                      optionList[(index+1) % 7],
-                      style: const TextStyle(
-                          fontSize: 15.0,
-                          color: CupertinoColors.systemGrey
-                      ),
-                    ),
-                    if (index % 5 != 0) Text(
-                      optionList[(index+2) % 7],
-                      style: const TextStyle(
-                          fontSize: 15.0,
-                          color: CupertinoColors.systemGrey
-                      ),
-                    ),
-                    Text(
-                      optionList[(index+3) % 7],
-                      style: const TextStyle(
-                          fontSize: 15.0,
-                          color: CupertinoColors.systemGrey
-                      ),
-                    ),
+
                   ],
                 ),
-                IconButton(
-                  onPressed: () { print("nu"); },
-                  icon: const Icon(Icons.refresh)
+                //右寄り
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.end, //center
+                  textDirection: TextDirection.ltr,
+                  children: [
+                    Image.asset(_foodImgPathList[index%3], height: 80, width: 80,),
+                    const Subtotal()
+                  ],
                 )
               ],
             ),
