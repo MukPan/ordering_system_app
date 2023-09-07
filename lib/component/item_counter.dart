@@ -22,22 +22,29 @@ class ItemCounter extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
   final int count = ref.watch(itemCountFamily(index)); //読取
 
-    return Row(
-      children: [
-        IconButton(
-            onPressed: (count <= 0) ? null : () {
-              _decreaseCount(ref);
-            },
-            icon: const Icon(Icons.remove)
-        ),
-        Text(count.toString()),
-        IconButton(
-            onPressed: () {
-              _increaseCount(ref);
-            },
-            icon: const Icon(Icons.add)
-        ),
-      ],
+    return Container(
+      margin: const EdgeInsets.only(top: 10, bottom: 10),
+      decoration: BoxDecoration(
+        color: const Color(0x10000000),
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: Row(
+        children: [
+          IconButton(
+              onPressed: (count <= 0) ? null : () {
+                _decreaseCount(ref);
+              },
+              icon: const Icon(Icons.remove)
+          ),
+          Text(count.toString()),
+          IconButton(
+              onPressed: () {
+                _increaseCount(ref);
+              },
+              icon: const Icon(Icons.add)
+          ),
+        ],
+      ),
     );
   }
 }

@@ -21,10 +21,13 @@ class Subtotal extends HookConsumerWidget {
     final int count = ref.watch(itemCountFamily(index));
 
 
-    return Text(
-      "${amount * count}円",
-      style: const TextStyle(
+    return Container(
+      margin: const EdgeInsets.only(top: 10, right: 10),
+      child: Text(
+        "${amount * count}円",
+        style: const TextStyle(
           fontSize: 15.0,
+        ),
       ),
     );
   }
