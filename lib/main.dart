@@ -20,13 +20,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        // colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         appBarTheme: const AppBarTheme(backgroundColor: Colors.white),
         scaffoldBackgroundColor: Colors.white,
         highlightColor: Colors.white,
-
 
         useMaterial3: true,
       ),
@@ -58,6 +57,9 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar: AppBar(
           title: Text(widget.title),
           surfaceTintColor: Colors.white, //スクロールすると紫色になるのを防ぐ
+          shape: const Border(
+            bottom: BorderSide(color: Colors.grey)
+          ),
         ),
         body: Column( //Stack
           children: [
