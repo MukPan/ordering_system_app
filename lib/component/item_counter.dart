@@ -41,7 +41,7 @@ class ItemCounter extends HookConsumerWidget {
                   isRemove = await showDialog(
                     context: context,
                     builder: (content) => RemoveItemAlertDialog(index: index)
-                  );
+                  ) ?? false;
                 }
 
                 if (count > 1 || isRemove) _decreaseCount(ref);
