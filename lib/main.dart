@@ -1,5 +1,4 @@
 import 'package:cash_register_app/component/default_app_bar.dart';
-import 'package:cash_register_app/context/to-total_bar.dart';
 import 'package:cash_register_app/pages/confirm_ordering_page.dart';
 
 import 'package:cash_register_app/showDialog/showDialog.dart';
@@ -54,7 +53,6 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: const DefaultAppBar(title: "商品の選択"),
-bottomNavigationBar: const ToTotalBar(),
         body:
         Container(
           margin: const EdgeInsets.all(30), //外周の余白
