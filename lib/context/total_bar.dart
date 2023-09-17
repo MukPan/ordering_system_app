@@ -31,7 +31,7 @@ class TotalBar extends StatelessWidget {
             ],
           ),
           const Spacer(),
-          Container(
+          SizedBox(
             width: double.infinity,
             height: 50,
             // margin: EdgeInsets.only(top: 10),
