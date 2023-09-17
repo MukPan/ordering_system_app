@@ -1,5 +1,7 @@
 import 'package:cash_register_app/component/default_app_bar.dart';
 import 'package:cash_register_app/pages/confirm_ordering_page.dart';
+import 'package:cash_register_app/showDialog/showDialog.dart';
+import 'package:cash_register_app/tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -24,7 +26,7 @@ class MyApp extends StatelessWidget {
         highlightColor: Colors.white,
         useMaterial3: true,
       ),
-      home: const MyHomePage(),
+      home: const Tab_bar(),
     );
   }
 }
@@ -44,7 +46,8 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
         appBar: const DefaultAppBar(title: "商品の選択"),
 
-        body: Container(
+        body:
+        Container(
           margin: const EdgeInsets.all(30), //外周の余白
           child: GridView.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -52,7 +55,7 @@ class MyHomePage extends StatelessWidget {
               mainAxisSpacing: 30,      //ボックス上下間のスペース
               crossAxisCount: 2,        //ボックスを横に並べる数
             ),
-            itemCount: 4, //要素数
+            itemCount: 10, //要素数
             //指定した要素の数分を生成
             itemBuilder: (context, index) {
               return ElevatedButton(
@@ -65,7 +68,9 @@ class MyHomePage extends StatelessWidget {
                       borderRadius: BorderRadius.all(Radius.circular(0)) //角ばったボタン、数値を上げると丸くなる
                   ),
                 ),
-                onPressed: () {}, //押下時ポップアップ
+                onPressed: () {
+                  showCustomDialog(context);
+                }, //押下時ポップアップ
                 child: const Text( //buttonの中身、商品名や画像、値段など
                   "button",
                   style: TextStyle(
@@ -76,15 +81,16 @@ class MyHomePage extends StatelessWidget {
               );
             },
           ),
+
         ),
+        );
 
       //**邪魔だったり必要なかったらコメントアウト(コードの先頭に//をつける)してね**//
         floatingActionButton: FloatingActionButton(
           onPressed: () { moveConfirmOrderingPage(context); },
           tooltip: "デバッグ用遷移ボタン\n邪魔だったら消してね",
           child: const Icon(Icons.arrow_right_alt),
-        ),
-      //********************************************************************//
     );
+      //********************************************************************/
   }
 }
