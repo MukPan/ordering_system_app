@@ -1,17 +1,25 @@
 import 'package:cash_register_app/component/default_app_bar.dart';
 import 'package:cash_register_app/pages/confirm_ordering_page.dart';
+
 import 'package:cash_register_app/showDialog/showDialog.dart';
 import 'package:cash_register_app/tabbar.dart';
+import 'package:firebase_core/firebase_core.dart';
+
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-void main() {
+import 'firebase_options.dart';
+
+void main() async {
+  //firebase用の初期化
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   // debugRepaintRainbowEnabled = true;
   runApp(const ProviderScope(child: MyApp()));
 }
 
-//TODO:ListTileに変える
-//TODO: 最後までスクロール内容が表示されるようにする
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
