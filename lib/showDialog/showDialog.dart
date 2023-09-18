@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'bottom.dart';
 import 'count.dart';
-import 'topping.dart'; // topping.dart をインポート
 
 void showCustomDialog(BuildContext context) {
   int counter = 0;
@@ -19,7 +18,7 @@ void showCustomDialog(BuildContext context) {
     builder: (BuildContext context) {
       return AlertDialog(
         backgroundColor: Colors.white,
-        title: Text(
+        title: const Text(
           '詳細',
           style: TextStyle(color: Colors.black),
         ),
@@ -42,7 +41,7 @@ void showCustomDialog(BuildContext context) {
               ),
             ),
             const SizedBox(height: 10),
-            Container(
+            const SizedBox(
               width: double.infinity,
               child: Text(
                 'トッピング',
@@ -72,64 +71,60 @@ void showCustomDialog(BuildContext context) {
                 },
               ),
             ),
-            Divider(
+            const Divider(
               color: Colors.black,
               indent: 0,
               endIndent: 0,
             ),
-            Container(
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        child: Text(
-                          '個数:',
-                          style: TextStyle(fontSize: 20),
-                        ),
-                      ),
-                      Container(
-                        child: Cuntpage(),
-                      ),
-                    ],
-                  ),
-                 Center(
-                   child: Container(
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Row(
-                        children: [
-                          SizedBox(width: 17.7),
-                      ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  primary: Colors.white, //背景色
-                                  side: BorderSide(
-                                    color: Colors.black, //色
-                                    width: 1, //太さ
-                                  ),
-                                ),
-                                onPressed: () {},
-                                child: Text('レジに進む', style: TextStyle(color: Colors.black)),
-                          ),
-                          SizedBox(width: 30),
-                          ElevatedButton(
+            Column(
+              children: [
+                Row(
+                  children: [
+                    const Text(
+                      '個数:',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    Container(
+                      child: Cuntpage(),
+                    ),
+                  ],
+                ),
+               Center(
+                 child: Container(
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Row(
+                      children: [
+                        const SizedBox(width: 17.7),
+                    ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                primary: Colors.yellow, //背景色
-                                side: BorderSide(
+                                primary: Colors.white, //背景色
+                                side: const BorderSide(
                                   color: Colors.black, //色
                                   width: 1, //太さ
                                 ),
                               ),
                               onPressed: () {},
-                              child: Text('カートに追加',style: TextStyle(color: Colors.black)),
-                          ),
-                        ],
-                      ),
+                              child: const Text('レジに進む', style: TextStyle(color: Colors.black)),
+                        ),
+                        SizedBox(width: 30),
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.yellow, //背景色
+                              side: const BorderSide(
+                                color: Colors.black, //色
+                                width: 1, //太さ
+                              ),
+                            ),
+                            onPressed: () {},
+                            child: Text('カートに追加',style: TextStyle(color: Colors.black)),
+                        ),
+                      ],
                     ),
                   ),
-                 ),
-                ],
-              ),
+                ),
+               ),
+              ],
             ),
           ],
         ),
