@@ -116,7 +116,9 @@ void showCustomDialog(BuildContext context) {
                                 width: 1, //太さ
                               ),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+
+                            },
                             child: Text('カートに追加',style: TextStyle(color: Colors.black)),
                         ),
                       ],

@@ -49,6 +49,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '729459310329',
     projectId: 'simplified-ordering-system',
     authDomain: 'simplified-ordering-system.firebaseapp.com',
+    databaseURL: 'https://simplified-ordering-system-default-rtdb.firebaseio.com',
     storageBucket: 'simplified-ordering-system.appspot.com',
     measurementId: 'G-8M6QRCMJYN',
   );
@@ -58,6 +59,7 @@ class DefaultFirebaseOptions {
     appId: '1:729459310329:android:1bf2579c423d1eac1aec28',
     messagingSenderId: '729459310329',
     projectId: 'simplified-ordering-system',
+    databaseURL: 'https://simplified-ordering-system-default-rtdb.firebaseio.com',
     storageBucket: 'simplified-ordering-system.appspot.com',
   );
 
@@ -66,6 +68,7 @@ class DefaultFirebaseOptions {
     appId: '1:729459310329:ios:bbd3865fd67ec7f81aec28',
     messagingSenderId: '729459310329',
     projectId: 'simplified-ordering-system',
+    databaseURL: 'https://simplified-ordering-system-default-rtdb.firebaseio.com',
     storageBucket: 'simplified-ordering-system.appspot.com',
     iosBundleId: 'com.example.orderingSystemApp',
   );
@@ -75,6 +78,7 @@ class DefaultFirebaseOptions {
     appId: '1:729459310329:ios:2bd4ccb3d1ffa3a21aec28',
     messagingSenderId: '729459310329',
     projectId: 'simplified-ordering-system',
+    databaseURL: 'https://simplified-ordering-system-default-rtdb.firebaseio.com',
     storageBucket: 'simplified-ordering-system.appspot.com',
     iosBundleId: 'com.example.orderingSystemApp.RunnerTests',
   );

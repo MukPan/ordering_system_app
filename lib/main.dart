@@ -9,6 +9,10 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'firebase_options.dart';
+import 'package:firebase_database/firebase_database.dart';
+
+FirebaseDatabase db = FirebaseDatabase.instance;
+
 
 void main() async {
   //firebase用の初期化
