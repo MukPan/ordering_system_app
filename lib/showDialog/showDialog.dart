@@ -96,19 +96,12 @@ void showCustomDialog(BuildContext context) {
                     child: Row(
                       children: [
                         const SizedBox(width: 17.7),
-                    ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                primary: Colors.white, //背景色
-                                side: const BorderSide(
-                                  color: Colors.black, //色
-                                  width: 1, //太さ
-                                ),
-                              ),
-                              onPressed: () {},
-                              child: const Text('レジに進む', style: TextStyle(color: Colors.black)),
-                        ),
                         SizedBox(width: 30),
-                        ElevatedButton(
+                    Center(
+                      child: SizedBox(
+                        width: 200, //横幅
+                        height: 50, //高さ
+                        child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               primary: Colors.yellow, //背景色
                               side: const BorderSide(
@@ -116,9 +109,15 @@ void showCustomDialog(BuildContext context) {
                                 width: 1, //太さ
                               ),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+
+                              // amount = counter
+
+                            },
                             child: Text('カートに追加',style: TextStyle(color: Colors.black)),
                         ),
+                      ),
+                    ),
                       ],
                     ),
                   ),
