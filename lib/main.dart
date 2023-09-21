@@ -8,6 +8,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import 'database/item_infos.dart';
 import 'firebase_options.dart';
 import 'package:firebase_database/firebase_database.dart';
 
@@ -21,6 +22,21 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   // debugRepaintRainbowEnabled = true;
+
+  //参照用データ初期化(この位置から変えないでね)
+  await itemInfos.fetchData();
+  //ex. 使用例(コメントアウト推奨)
+  //商品リストの取得
+  // final List<ItemInfo> itemInfoList = itemInfos.getList();
+  // for (final itemInfo in itemInfoList) {
+  //   print("${itemInfo.itemName}(${itemInfo.category}): ${itemInfo.itemPrice}円"); //"商品名"("カテゴリ"): "価格"円 × "個数"
+  //   //オプションリストの取得
+  //   final optInfoList = itemInfo.optInfoList;
+  //   for (final optInfo in optInfoList) {
+  //     print("・${optInfo.optName}(${optInfo.optPrice}円)"); //・"オプション名"("オプション価格")円
+  //   }
+  // }
+
   runApp(const ProviderScope(child: MyApp()));
 }
 
