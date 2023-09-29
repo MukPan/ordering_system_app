@@ -1,7 +1,8 @@
 
 import 'package:flutter/material.dart';
 
-//ホバーとクリックをグレーにする
+///ホバーとクリックをグレーにする関数
+///ex. overlayColor: MaterialStateProperty.resolveWith(hoverAndTapIsGrey),
 Color hoverAndTapIsGrey(Set<MaterialState> states) {
     //ホバー
     if (states.any((state) => state == MaterialState.hovered)) {

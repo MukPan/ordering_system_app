@@ -4,6 +4,8 @@ import 'package:cash_register_app/showDialog/showDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../common/default_material_state.dart';
+
 
 class Food_page extends StatelessWidget {
   const Food_page({super.key});
@@ -34,7 +36,7 @@ class Food_page extends StatelessWidget {
             return ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   elevation: 3, //影の大きさ
-                  foregroundColor: Colors.grey.withAlpha(100), //ボタンを押下時のエフェクト色と文字色(子要素で上書き可能)
+                  foregroundColor: Colors.grey.withAlpha(10), //ボタンを押下時のエフェクト色と文字色(子要素で上書き可能)
                   backgroundColor: Colors.white,
                   surfaceTintColor: Colors.white,
                   shape: const RoundedRectangleBorder(
