@@ -38,9 +38,11 @@ class ItemObj {
   ///小計を算出して返すメソッド
   int getSubtotal() {
     //全てのオプション価格の合計
-    final int optsPrice = optList
+    final int optsPrice = (optList.isNotEmpty)
+      ?optList
         .map((optObj) => optObj.optPrice)
-        .reduce((sum, price) => sum + price);
+        .reduce((sum, price) => sum + price)
+      :0;
 
     return qty * (itemPrice + optsPrice);
   }
