@@ -1,17 +1,50 @@
+import 'package:cash_register_app/object/item_obj.dart';
+import 'package:cash_register_app/provider/cart_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../database/Individual items.dart';
+import '../database/item_infos.dart';
+import '../object/opt_obj.dart';
+import '../provider/amount_per_item.dart';
+import '../provider/countprovider.dart';
+import '../provider/opt_is_enabled.dart';
 import 'bottom.dart';
 import 'count.dart';
+import 'package:provider/provider.dart';
+import 'cart.dart';
 
-void showCustomDialog(BuildContext context) {
-  int counter = 0;
-  List<String> items = [
-    'チーズ',
-    'ケチャップ',
-    'ケチャップ',
-    'チーズ',
-    'ケチャップ',
-    'ケチャップ',
-  ];
+import '../cart/cart.dart';
+
+
+void showCustomDialog(BuildContext context, WidgetRef ref) {
+
+
+  // final String itemName = itemObj.itemName; //"唐揚げ"
+  // final int qty = itemObj.qty; //3(個)
+  // final List<OptObj> optNameList = itemObj.optList; //["焼きチーズ", "ケチャップ"]
+  // final int amountPerItem = itemObj.itemPrice;
+  // final ItemInfo targetItemInfo = itemInfos.getList()
+  //     .where((itemInfo) => itemInfo.itemName == itemName)
+  //     .first;
+  // //オプション候補
+  // final targetOptInfoList = targetItemInfo.optInfoList;
+  //
+  // //プロバイダーを初期化(全てのオプションを無効"false")ここから重要
+  // for (final optName in targetOptInfoList.map((optInfo) => optInfo.optName)) {
+  //   ref.read(optIsEnabledFamily(optName).notifier).state = false;
+  // }
+  // //有効なオプションをプロバイダーに登録
+  // for (final optName in optNameList) {
+  //   ref.read(optIsEnabledFamily(optName as String).notifier).state = true;
+  // }
+  // //商品の個数をプロバイダーに登録
+  // ref.read(counterProvider.notifier).state = qty;
+  // //初期の1個あたりの商品の値段をプロバイダーに登録
+  // ref.read(amountPerItemProvider.notifier).state = amountPerItem;
+
+
+
+
 
   showDialog(
     context: context,
@@ -55,17 +88,20 @@ void showCustomDialog(BuildContext context) {
               color: Colors.transparent,
               child: ListView.builder(
                 shrinkWrap: true,
-                itemCount: items.length,
+                itemCount: karaageOptions.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Stack(
                     children: [
                       Card(
-                        child: ListTile(title: Text(items[index])),
+                        child: OptionTile(optInfo: karaageOptions[index]),
+                        // child: ListTile(title: Text(karaageOptions[index].optName)),
                       ),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: NotificationButton(),
-                      ),
+                      // Align(
+                        // alignment: Alignment.centerRight,
+                        // child: OptionTile(optInfo: karaageOptions[index]),
+
+                        // child: OptionTile(optInfo: karaageOptions[index])
+                      // ),
                     ],
                   );
                 },
@@ -85,44 +121,39 @@ void showCustomDialog(BuildContext context) {
                       style: TextStyle(fontSize: 20),
                     ),
                     Container(
-                      child: Cuntpage(),
+                      child:CounterWidget(),
                     ),
                   ],
                 ),
-               Center(
-                 child: Container(
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Row(
-                      children: [
-                        const SizedBox(width: 17.7),
-                        SizedBox(width: 30),
-                    Center(
-                      child: SizedBox(
-                        width: 200, //横幅
-                        height: 50, //高さ
-                        child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors.yellow, //背景色
-                              side: const BorderSide(
-                                color: Colors.black, //色
-                                width: 1, //太さ
-                              ),
-                            ),
-                            onPressed: () {
-
-                              // amount = counter
-
-                            },
-                            child: Text('カートに追加',style: TextStyle(color: Colors.black)),
+                Center(
+                  child: SizedBox(
+                    width: 200, //横幅
+                    height: 50, //高さ
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.yellow, //背景色
+                        side: const BorderSide(
+                          color: Colors.black, //色
+                          width: 1, //太さ
                         ),
                       ),
-                    ),
-                      ],
+                      onPressed: () {
+
+                        final cartListController = ref.watch(cartListProvider);
+
+                        final cartService = CartListService(cartListController);
+
+                        cartService.addItemToCart(context, ref);
+                        // CartModel();
+
+                        Navigator.of(context).pop();
+
+
+                      },
+                      child: Text('カートに追加',style: TextStyle(color: Colors.black)),
                     ),
                   ),
                 ),
-               ),
               ],
             ),
           ],

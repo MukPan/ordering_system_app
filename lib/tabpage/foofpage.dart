@@ -4,8 +4,11 @@ import 'package:cash_register_app/showDialog/showDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../database/item_infos.dart';
+import '../object/item_obj.dart';
 
-class Food_page extends StatelessWidget {
+
+class Food_page extends HookConsumerWidget {
   const Food_page({super.key});
 
   ///注文内容確認ページへの遷移メソッド
@@ -16,7 +19,7 @@ class Food_page extends StatelessWidget {
   };
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
     return Scaffold(
 
       body:
@@ -42,7 +45,7 @@ class Food_page extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  showCustomDialog(context);
+                  showCustomDialog(context,ref);
                 }, //押下時ポップアップ
                 child: const Text( //buttonの中身、商品名や画像、値段など
                   "button",

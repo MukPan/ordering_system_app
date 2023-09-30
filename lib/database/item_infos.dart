@@ -64,7 +64,7 @@ class ItemInfos {
     print("itemInfos初期化完了");
   }
 
-  ///参照用リストを返す
+  ///参照用リストを返す　　
   List<ItemInfo> getList() {
     //フェッチ未完了の場合を弾く
     if (!_isFetched) return [];

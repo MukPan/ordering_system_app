@@ -1,4 +1,5 @@
 import 'package:cash_register_app/component/default_app_bar.dart';
+import 'package:cash_register_app/object/item_obj.dart';
 import 'package:cash_register_app/pages/confirm_ordering_page.dart';
 
 import 'package:cash_register_app/showDialog/showDialog.dart';
@@ -59,8 +60,10 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends HookConsumerWidget {
   const MyHomePage({super.key});
+
+
 
   ///注文内容確認ページへの遷移メソッド
   void moveConfirmOrderingPage(BuildContext context) => {
@@ -70,7 +73,10 @@ class MyHomePage extends StatelessWidget {
   };
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
+
+
+
     return Scaffold(
         appBar: const DefaultAppBar(title: "商品の選択"),
         body:
@@ -96,7 +102,7 @@ class MyHomePage extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  showCustomDialog(context);
+                  showCustomDialog(context, ref);
                 }, //押下時ポップアップ
                 child: const Text( //buttonの中身、商品名や画像、値段など
                   "button",
