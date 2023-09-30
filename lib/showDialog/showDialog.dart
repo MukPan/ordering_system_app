@@ -1,5 +1,6 @@
 import 'package:cash_register_app/object/item_obj.dart';
 import 'package:cash_register_app/provider/cart_provider.dart';
+import 'package:cash_register_app/showDialog/sub_total.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../database/Individual items.dart';
@@ -16,7 +17,33 @@ import 'cart.dart';
 import '../cart/cart.dart';
 
 
-void showCustomDialog(BuildContext context, WidgetRef ref) {
+void showCustomDialog(BuildContext context, WidgetRef ref,ItemInfo iteminfo) {
+
+  for (final optName in iteminfo.optInfoList.map((optInfo) => optInfo.optName)) {
+    ref.read(optIsEnabledFamily(optName).notifier).state = false;
+  }
+  ref.read(counterProvider.notifier).state = 1;
+
+  final int itemPrice = iteminfo.itemPrice;
+
+  final int optsPrice = (iteminfo.optInfoList.isNotEmpty)
+      ? iteminfo.optInfoList
+      .map((optinfo) => optinfo.optPrice)
+      .reduce((sum, price) => sum + price)
+      : 0;
+  final int amountPerItem = itemPrice + optsPrice;
+
+  ref.read(amountPerItemProvider.notifier).state = amountPerItem;
+
+  // final amount_per = ref.watch(amountPerItemProvider);
+  // final counter = ref.watch(counterProvider);
+
+  // final sub_total = amount_per * counter;
+
+
+
+
+
 
 
   // final String itemName = itemObj.itemName; //"唐揚げ"
@@ -49,10 +76,13 @@ void showCustomDialog(BuildContext context, WidgetRef ref) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
+      final amount_per = ref.watch(amountPerItemProvider);
+      final counter = ref.watch(counterProvider);
+      final sub_total = amount_per * counter;
       return AlertDialog(
         backgroundColor: Colors.white,
         title: const Text(
-          '詳細',
+          '商品名',
           style: TextStyle(color: Colors.black),
         ),
         content: Column(
@@ -88,12 +118,12 @@ void showCustomDialog(BuildContext context, WidgetRef ref) {
               color: Colors.transparent,
               child: ListView.builder(
                 shrinkWrap: true,
-                itemCount: karaageOptions.length,
+                itemCount:iteminfo.optInfoList.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Stack(
                     children: [
                       Card(
-                        child: OptionTile(optInfo: karaageOptions[index]),
+                        child: OptionTile(optInfo: iteminfo.optInfoList[index]),
                         // child: ListTile(title: Text(karaageOptions[index].optName)),
                       ),
                       // Align(
@@ -123,6 +153,12 @@ void showCustomDialog(BuildContext context, WidgetRef ref) {
                     Container(
                       child:CounterWidget(),
                     ),
+                     Text(
+                      '小計：'
+                    ),
+                    Container(
+                      child: SubTotalWidget(),
+                    )
                   ],
                 ),
                 Center(
@@ -143,7 +179,7 @@ void showCustomDialog(BuildContext context, WidgetRef ref) {
 
                         final cartService = CartListService(cartListController);
 
-                        cartService.addItemToCart(context, ref);
+                        cartService.addItemToCart(context, ref,iteminfo);
                         // CartModel();
 
                         Navigator.of(context).pop();

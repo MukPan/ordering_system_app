@@ -31,9 +31,13 @@ class Menu_page extends HookConsumerWidget {
             mainAxisSpacing: 30,      //ボックス上下間のスペース
             crossAxisCount: 2,        //ボックスを横に並べる数
           ),
-          itemCount: 10, //要素数
+          itemCount: itemInfos.getList().where((iteminfo) => iteminfo.category == "drink").length, //要素数
           //指定した要素の数分を生成
           itemBuilder: (context, index) {
+
+            final List<ItemInfo> drinkinfolist = itemInfos.getList().where((iteminfo) => iteminfo.category == "drink").toList() ;
+            final ItemInfo drinkinfo = drinkinfolist[index];
+
             return ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   elevation: 3, //影の大きさ
@@ -45,7 +49,7 @@ class Menu_page extends HookConsumerWidget {
                   ),
                 ),
                 onPressed: () {
-                  showCustomDialog(context,ref);
+                  showCustomDialog(context,ref,drinkinfo);
                 }, //押下時ポップアップ
                 child: const Text( //buttonの中身、商品名や画像、値段など
                   "button",

@@ -10,7 +10,7 @@ final db2 = FirebaseDatabase.instance;
 ///商品の参照用オブジェクトをリストを保持する役割を担うクラス
 class ItemInfos {
   ///商品参照用オブジェクトのリスト
-  List<ItemInfo> _itemInfoList = [];
+  final List<ItemInfo> _itemInfoList = [];
   ///DBからの読込が完了しているか
   bool _isFetched = false;
 
@@ -31,7 +31,6 @@ class ItemInfos {
       )});
     }
 
-
     //次に商品データの読込
     final itemListEvent = await db2.ref("items/").once();
     final itemListSnap = itemListEvent.snapshot.children; //{たこ焼き: {}, ポテト: {}...
@@ -42,7 +41,7 @@ class ItemInfos {
       final String category = (itemSnap.value as Map<String, dynamic>)["category"]; //food
       //TODO: 配列が0のときの挙動を確かめる
       final List<String> optNameList = (((itemSnap.value as Map<String, dynamic>)["options"] ?? [])  //["焼きチーズ","ソース",...]
-          as List<dynamic>)
+      as List<dynamic>)
           .map((e) => e.toString())
           .toList();
 
@@ -64,7 +63,7 @@ class ItemInfos {
     print("itemInfos初期化完了");
   }
 
-  ///参照用リストを返す　　
+  ///参照用リストを返す
   List<ItemInfo> getList() {
     //フェッチ未完了の場合を弾く
     if (!_isFetched) return [];
