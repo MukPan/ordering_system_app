@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../database/Individual items.dart';
 import '../database/item_infos.dart';
+import '../image/image_asset.dart';
 import '../object/opt_obj.dart';
 import '../provider/amount_per_item.dart';
 import '../provider/countprovider.dart';
@@ -26,7 +27,7 @@ void showCustomDialog(BuildContext context, WidgetRef ref,ItemInfo iteminfo) {
 
   final int itemPrice = iteminfo.itemPrice;
 
-  final int optsPrice = (iteminfo.optInfoList.isNotEmpty)
+  final int optsPrice = (!iteminfo.optInfoList.isNotEmpty)
       ? iteminfo.optInfoList
       .map((optinfo) => optinfo.optPrice)
       .reduce((sum, price) => sum + price)
@@ -34,6 +35,10 @@ void showCustomDialog(BuildContext context, WidgetRef ref,ItemInfo iteminfo) {
   final int amountPerItem = itemPrice + optsPrice;
 
   ref.read(amountPerItemProvider.notifier).state = amountPerItem;
+
+  final String item_name = iteminfo.itemName;
+
+
 
   // final amount_per = ref.watch(amountPerItemProvider);
   // final counter = ref.watch(counterProvider);
@@ -76,15 +81,24 @@ void showCustomDialog(BuildContext context, WidgetRef ref,ItemInfo iteminfo) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
+
       final amount_per = ref.watch(amountPerItemProvider);
       final counter = ref.watch(counterProvider);
       final sub_total = amount_per * counter;
+      final String item_name = iteminfo.itemName;
+
+      print(item_name);
+
       return AlertDialog(
         backgroundColor: Colors.white,
-        title: const Text(
-          '商品名',
+
+
+        title:
+            Text(
+             '${item_name}',
           style: TextStyle(color: Colors.black),
         ),
+
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -97,10 +111,12 @@ void showCustomDialog(BuildContext context, WidgetRef ref,ItemInfo iteminfo) {
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
-                child: Image.asset(
-                  'images/fastfood_potato.png',
-                  fit: BoxFit.contain,
-                ),
+                child:
+                ItemImg(itemName: item_name,)
+                // Image.asset(
+                //   'images/fastfood_potato.png',
+                //   fit: BoxFit.contain,
+                // ),
               ),
             ),
             const SizedBox(height: 10),

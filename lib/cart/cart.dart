@@ -2,6 +2,7 @@ import 'dart:html';
 
 import 'package:cash_register_app/object/item_obj.dart';
 import 'package:cash_register_app/provider/opt_is_enabled.dart';
+import 'package:cash_register_app/provider/total_provider.dart';
 import 'package:cash_register_app/showDialog/count.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -118,16 +119,19 @@ class CartListService  {
       print('  optList: ');
       for (int j = 0; j < item.optList.length; j++) {
         final opt = item.optList[j];
-        print('    Option $j:');
-        print('      optName: ${opt.optName}');
-        print('      optPrice: ${opt.optPrice}');
+        print('Option $j:');
+        print('optName: ${opt.optName}');
+        print('optPrice: ${opt.optPrice}');
 
       }
       final int subtotal = item.getSubtotal();
       print('小計: $subtotal');
       // print("test");
-    }
+      var total = ref.watch(totalProvider);
+      total = total + subtotal;
 
+      print(total);
+    }
 
   }
 }
