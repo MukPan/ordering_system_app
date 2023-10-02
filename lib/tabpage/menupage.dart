@@ -21,7 +21,7 @@ class Menu_page extends StatelessWidget {
 
       body:
       Container(
-        margin: const EdgeInsets.all(20), //外周の余白
+        margin: const EdgeInsets.fromLTRB(20, 20, 20, 0), //外周の余白
         child: GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisSpacing: 10,     //ボックス左右間のスペース
