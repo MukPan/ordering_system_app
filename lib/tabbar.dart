@@ -5,6 +5,8 @@ import 'package:cash_register_app/tabpage/menupage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'component/sysken_logo.dart';
+
 
 
 class Tab_bar extends StatelessWidget {
@@ -34,7 +36,7 @@ class Tab_bar extends StatelessWidget {
           bottomNavigationBar: const ToTotalBar(),
           appBar: AppBar(
             systemOverlayStyle: const SystemUiOverlayStyle(),
-            title: const Text('メニュー'), //ここシス研のアイコンに
+            title: const Center(child: SyskenLogo()), //ここシス研のアイコンに
             surfaceTintColor: Colors.white,
             backgroundColor: Colors.white,
             shape: const Border(
