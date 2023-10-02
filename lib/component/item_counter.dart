@@ -1,3 +1,5 @@
+import 'package:cash_register_app/dialog/alert_dialog_texts.dart';
+import 'package:cash_register_app/dialog/default_alert_dialog.dart';
 import 'package:cash_register_app/dialog/remove_item_alert_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -40,7 +42,12 @@ class ItemCounter extends HookConsumerWidget {
               if (count == 1) {
                 isRemove = await showDialog(
                     context: context,
-                    builder: (content) => RemoveItemAlertDialog(index: index)
+                    builder: (content) => DefaultAlertDialog(
+                      alertDialogTexts: AlertDialogTexts(
+                        title: const Text("商品の削除"),
+                        content: const Text("注文リストに登録した商品を削除しますか。")
+                      ),
+                    )
                 ) ?? false;
               }
 
