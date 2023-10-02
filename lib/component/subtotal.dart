@@ -26,7 +26,7 @@ class Subtotal extends HookConsumerWidget {
       child: Text(
         "${amount * count}円",
         style: const TextStyle(
-          fontSize: 15.0,
+          fontSize: 20,
         ),
       ),
     );

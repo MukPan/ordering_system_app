@@ -91,14 +91,24 @@ void showCustomDialog(BuildContext context, WidgetRef ref,ItemInfo iteminfo) {
 
       return AlertDialog(
         backgroundColor: Colors.white,
-
-
+        surfaceTintColor: Colors.white,
+        titleTextStyle: const TextStyle(
+          fontSize: 30,
+        ),
+        contentTextStyle: const TextStyle(
+          fontSize: 20,
+        ),
+        titlePadding: const EdgeInsets.fromLTRB(40, 30, 40, 0),
+        contentPadding: const EdgeInsets.fromLTRB(40, 20, 40, 30),
+        actionsPadding: const EdgeInsets.fromLTRB(40, 0, 40, 30),
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10.0))
+        ),
         title:
             Text(
              '${item_name}',
           style: TextStyle(color: Colors.black),
         ),
-
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -211,11 +221,22 @@ void showCustomDialog(BuildContext context, WidgetRef ref,ItemInfo iteminfo) {
           ],
         ),
         actions: [
-          TextButton(
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              side: const BorderSide(color: Colors.grey),
+              foregroundColor: Colors.grey.withAlpha(10), //ボタンを押下時のエフェクト色と文字色(子要素で上書き可能)
+              backgroundColor: Colors.white,
+              surfaceTintColor: Colors.white,
+              padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(5))
+              ),
+
+            ),
             onPressed: () {
               Navigator.of(context).pop();
             },
-            child: Text('閉じる'),
+            child: const Text('閉じる', style: TextStyle(color: Colors.black)),
           ),
         ],
       );

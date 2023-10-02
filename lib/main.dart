@@ -53,6 +53,7 @@ class MyApp extends StatelessWidget {
         appBarTheme: const AppBarTheme(backgroundColor: Colors.white),
         scaffoldBackgroundColor: Colors.white,
         highlightColor: Colors.white,
+        indicatorColor: Colors.white,
         useMaterial3: true,
       ),
       home: const Tab_bar(),

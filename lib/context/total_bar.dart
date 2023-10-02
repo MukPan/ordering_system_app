@@ -8,21 +8,21 @@ class TotalBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 180,
-      padding: const EdgeInsets.all(20),
-      decoration: const BoxDecoration(
-          color: Colors.white,
-          border: Border(
-              top: BorderSide(
-                color: Colors.grey,
-              )
-          )
+    return BottomAppBar(
+      shadowColor: Colors.black,
+      elevation: 20,
+      color: Colors.white,
+      notchMargin: 6.0,
+      height: MediaQuery.of(context).size.height * (1/4), //bottomBarの高さ
+      shape: const AutomaticNotchedShape(
+        RoundedRectangleBorder(),
+        StadiumBorder(
+          side: BorderSide(),
+        ),
       ),
       child: Column(
-        // crossAxisAlignment: CrossAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-
           const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -43,7 +43,8 @@ class TotalBar extends StatelessWidget {
                 child: const Text(
                   "注文を確定する",
                   style: TextStyle(
-                    color: Colors.black,
+                    color: Colors.white,
+                    fontSize: 20
                   ),
                 )
             ),
