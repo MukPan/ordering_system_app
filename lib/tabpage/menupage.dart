@@ -1,11 +1,14 @@
 import 'package:cash_register_app/component/default_app_bar.dart';
+import 'package:cash_register_app/database/item_infos.dart';
 import 'package:cash_register_app/pages/confirm_ordering_page.dart';
 import 'package:cash_register_app/showDialog/showDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../object/item_obj.dart';
 
-class Menu_page extends StatelessWidget {
+
+class Menu_page extends HookConsumerWidget {
   const Menu_page({super.key});
 
   ///注文内容確認ページへの遷移メソッド
@@ -16,7 +19,7 @@ class Menu_page extends StatelessWidget {
   };
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
     return Scaffold(
 
       body:
@@ -28,9 +31,12 @@ class Menu_page extends StatelessWidget {
             mainAxisSpacing: 10,      //ボックス上下間のスペース
             crossAxisCount: 2,        //ボックスを横に並べる数
           ),
-          itemCount: 10, //要素数
+          itemCount: itemInfos.getList().where((iteminfo) => iteminfo.category == "drink").length, //要素数
           //指定した要素の数分を生成
           itemBuilder: (context, index) {
+            final List<ItemInfo> drinkinfolist = itemInfos.getList().where((iteminfo) => iteminfo.category == "drink").toList() ;
+            final ItemInfo drinkinfo = drinkinfolist[index];
+
             return Container(
               margin: const EdgeInsets.all(10),
               child: ElevatedButton(
@@ -44,7 +50,7 @@ class Menu_page extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    showCustomDialog(context);
+                  showCustomDialog(context,ref,drinkinfo);
                   }, //押下時ポップアップ
                   child: const Text( //buttonの中身、商品名や画像、値段など
                     "button",
@@ -54,6 +60,7 @@ class Menu_page extends StatelessWidget {
                     ),
                   )
               ),
+
             );
           },
         ),
