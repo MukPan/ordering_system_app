@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
 
+import '../dialog/check_my_orders_dialog.dart';
 import '../pages/confirm_ordering_page.dart'; //上のmaterialと競合を防ぐ
 
 class ToTotalBar extends StatelessWidget {
@@ -35,11 +36,14 @@ class ToTotalBar extends StatelessWidget {
           //カートアイコン
           Container(
             margin: const EdgeInsets.only(right: 10),
-            child: const badges.Badge(
-              badgeContent: Text("2", style: TextStyle(color: Colors.white, fontSize: 15)),
-              badgeStyle: badges.BadgeStyle(badgeColor: Colors.red, padding: EdgeInsets.all(8)),
+            child: badges.Badge(
+              badgeContent: const Text("2", style: TextStyle(color: Colors.white, fontSize: 15)),
+              badgeStyle: const badges.BadgeStyle(badgeColor: Colors.red, padding: EdgeInsets.all(8)),
               // position: badges.BadgePosition.,
-              child: Icon(Icons.shopping_cart, size: 50,),
+              child: IconButton(
+                onPressed: () { showCheckMyOrdersDialog(context); },
+                icon: const Icon(Icons.shopping_cart, size: 50,),
+              )
             ),
           ),
           //合計金額
