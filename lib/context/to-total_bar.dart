@@ -54,8 +54,8 @@ class ToTotalBar extends StatelessWidget {
               height: 50,
               child: ElevatedButton(
                 style: ButtonStyle(
-                    backgroundColor:
-                    MaterialStateProperty.all<Color>(Colors.orange)),
+                  backgroundColor: MaterialStateProperty.all<Color>(Colors.orange)
+                ),
                 onPressed: () { moveConfirmOrderingPage(context); },
                 child: const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 15),

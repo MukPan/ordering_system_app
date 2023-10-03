@@ -27,19 +27,15 @@ class OptionTile extends HookConsumerWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween, // これで両端に寄せる
       children: [
-        Text(optInfo.optName),
+        Text("$optName${(optPrice != 0) ? "(+$optPrice円)" : ""}"),
         ElevatedButton(
             style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.white, //押したときの波動色
                 backgroundColor: (isEnabled) ? Colors.orange : Colors.grey
             ),
             onPressed: () {
-
               // 1. オプションの有効/無効状態を取得
               final bool isEnabledNow = ref.read(optIsEnabledFamily(optName));
-
-
-
               // // 2. "あり" の場合にのみオブジェクトを更新
               // if (!isEnabledNow) {
               //   print("ボタン");
@@ -48,40 +44,14 @@ class OptionTile extends HookConsumerWidget {
               // }else{
               //   ref.read(optionObjectProvider.notifier).state = null;
               // }
-
               // 4. 有効/無効の切り替えと価格の更新を行う
               ref.read(optIsEnabledFamily(optName).notifier).state = !isEnabledNow;
               ref.read(amountPerItemProvider.notifier).state += (isEnabledNow) ? -optPrice : optPrice;
             },
-            // onPressed: () {
-            //   // 1. オプションの有効/無効状態を取得
-            //   final bool isEnabledNow = ref.read(optIsEnabledFamily(optName));
-            //
-            //   if (!isEnabledNow){
-            //
-            //     OptObj(optName: optName, optPrice: optPrice);
-            //
-            //   }else{
-            //
-            //   }
-            //
-            //   ref.read(optIsEnabledFamily(optName).notifier).state = !isEnabledNow;
-            //   ref.read(amountPerItemProvider.notifier).state += (isEnabledNow) ? optPrice : -optPrice;
-            // },
-            // onPressed: () {
-            //   //ありなし反転
-            //   ref.read(optIsEnabledFamily(optName).notifier)
-            //       .state = !ref.read(optIsEnabledFamily(optName));
-            //   //現在のボタンの状態
-            //   final bool isEnabledNow = ref.read(optIsEnabledFamily(optName));
-            //   //一つ当たりの値段を更新
-            //   ref.read(amountPerItemProvider.notifier)
-            //       .state += (isEnabledNow) ? optPrice : -optPrice;
-            // },
             child: Text(
               (isEnabled) ? "あり" : "なし",
               style: const TextStyle(
-                  color: Colors.white
+                color: Colors.white
               ),
             )
         ),
