@@ -117,7 +117,7 @@ void showCustomDialog(BuildContext context, WidgetRef ref,ItemInfo iteminfo) {
                   margin: const EdgeInsets.symmetric(vertical: 15),
                   child: const Text(
                     'トッピング',
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(fontSize: 20, color: Colors.grey),
                   ),
                 ) : Container(),
               //オプション一覧 iteminfo.optInfoList.length
