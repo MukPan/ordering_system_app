@@ -1,26 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../object/opt_obj.dart';
+
 class OptionName extends StatelessWidget {
-  const OptionName({Key? key, required this.index}) : super(key: key);
+  const OptionName({Key? key, required this.optObj}) : super(key: key);
 
-  final int index;
-
-  static const List<String> _optionList = [
-    "マヨネーズ",
-    "ケチャップ",
-    "ケチャップ&マヨネーズ",
-    "塩",
-    "焼きチーズ",
-    "ソース",
-    "青のり",
-  ];
-
+  ///オプションObj
+  final OptObj optObj;
 
   @override
   Widget build(BuildContext context) {
+    final optName = optObj.optName;
+    final optprice = optObj.optPrice;
     return Text(
-      _optionList[index % 3],
+      "$optName${(optprice != 0) ? '($optprice円)' : ''}",
       style: const TextStyle(
           fontSize: 15.0,
           color: CupertinoColors.systemGrey

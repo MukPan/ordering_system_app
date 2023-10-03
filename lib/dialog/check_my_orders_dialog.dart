@@ -1,10 +1,19 @@
 
-//下から注文内容を出す
 import 'package:flutter/material.dart';
-
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../cart/cart.dart';
 import '../context/item_list.dart';
+import '../object/item_obj.dart';
+import '../provider/cart_provider.dart';
 
-void showCheckMyOrdersDialog(context) {
+///下から注文内容を出すダイアログ
+void showCheckMyOrdersDialog(context, WidgetRef ref) {
+  final cartListController = ref.watch(cartListProvider);
+  final cartService = CartListService(cartListController);
+
+  //かごに入っているリストを取得
+  final List<ItemObj> cartList = cartService.getCartList();
+
   showModalBottomSheet(
     //モーダルの背景の色、透過
       backgroundColor: Colors.transparent,
@@ -34,10 +43,11 @@ void showCheckMyOrdersDialog(context) {
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
+                //注文リスト
                 Expanded(
                   child: Container(
                     margin: const EdgeInsets.symmetric(horizontal: 10),
-                    child: const ItemList(),
+                    child: ItemList(cartList: cartList),
                   ),
                 )
               ],
