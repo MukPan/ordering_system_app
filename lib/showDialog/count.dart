@@ -57,22 +57,22 @@ class CounterWidget extends HookConsumerWidget {
     // CounterProviderを取得
     // final counterProvider = Provider.of<CounterProvider>(context);
 
-   final counter = ref.watch(counterProvider);
+    final counter = ref.watch(counterProvider);
 
     return Row(
       children: [
         IconButton(
           icon: const Icon(Icons.remove_circle),
-          onPressed: () {
-           decrement(ref); // ボタンが押されたときにデクリメント
-          },
+          onPressed: (counter > 1) ? () {
+            decrement(ref); // ボタンが押されたときにデクリメント
+          } : null,
         ),
-        Text('${counter}'),
+        Text('$counter', style: const TextStyle(fontSize: 20)),
         IconButton(
           icon: const Icon(Icons.add_circle),
-          onPressed: () {
+          onPressed:  (counter < 5) ? () {
             incrementCounter(ref); // ボタンが押されたときにインクリメント
-          },
+          } : null,
         ),
       ],
     );

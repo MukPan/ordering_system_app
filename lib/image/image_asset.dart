@@ -21,6 +21,7 @@ class ItemImg extends StatelessWidget {
     "唐揚げ" : "images/food_karaage_cup.png",
     "たこ焼き" : "images/takoyaki_fune.png",
     "ポテト" : "images/fastfood_potato.png",
+    "コーラ" : "images/cola.png"
   };
 
   @override

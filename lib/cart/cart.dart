@@ -82,13 +82,16 @@ class CartListService  {
 
   void addItemToCart(BuildContext context,WidgetRef ref,ItemInfo iteminfo) {
 
-     final optList = karaageOptions
+    final optList = karaageOptions
         .where((optInfo) => ref.read(optIsEnabledFamily(optInfo.optName)) == true )
           .map((optInfo) => OptObj(optName: optInfo.optName, optPrice: optInfo.optPrice))
               .toList();
     print(optList);
-    int sum = iteminfo.optInfoList.map((optInfo) => optInfo.optPrice)
-        .reduce((sum, price) => sum + price);
+    // int sum = (iteminfo.optInfoList.isNotEmpty)
+    //     ? iteminfo.optInfoList
+    //       .map((optInfo) => optInfo.optPrice)
+    //       .reduce((sum, price) => sum + price)
+    //     : 0;
 
     final optionObject = ref.watch(optionObjectProvider);
 

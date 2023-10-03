@@ -28,7 +28,7 @@ void showCustomDialog(BuildContext context, WidgetRef ref,ItemInfo iteminfo) {
 
   final int itemPrice = iteminfo.itemPrice;
 
-  final int optsPrice = (!iteminfo.optInfoList.isNotEmpty)
+  final int optsPrice = (iteminfo.optInfoList.isNotEmpty) //!を消した
       ? iteminfo.optInfoList
       .map((optinfo) => optinfo.optPrice)
       .reduce((sum, price) => sum + price)
@@ -43,6 +43,10 @@ void showCustomDialog(BuildContext context, WidgetRef ref,ItemInfo iteminfo) {
   // final counter = ref.watch(counterProvider);
 
   // final sub_total = amount_per * counter;
+
+  //画面サイズ取得
+  final screenWidth = MediaQuery.of(context).size.width;
+  final screenHeight = MediaQuery.of(context).size.height;
 
   showDialog(
     context: context,
@@ -87,116 +91,83 @@ void showCustomDialog(BuildContext context, WidgetRef ref,ItemInfo iteminfo) {
             )
           ],
         ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20),
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              // padding: EdgeInsets.,
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey),
-                borderRadius: BorderRadius.circular(20),
+        content: SizedBox(
+          width: screenWidth * 0.7, //7割のサイズ
+          height: (iteminfo.optInfoList.isNotEmpty)
+            ? screenHeight * 0.75  //7.5割のサイズ
+            : null,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 20),
+                width: double.infinity,
+                padding: const EdgeInsets.all(15),
+                // padding: EdgeInsets.,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: ItemImg(itemName: item_name, size: 120),
               ),
-              child: ItemImg(itemName: item_name, size: 120),
-            ),
-            // Container(
-            //   width: 300,
-            //   height: 200,
-            //   decoration: BoxDecoration(
-            //     border: Border.all(color: Colors.grey),
-            //     borderRadius: BorderRadius.circular(20),
-            //   ),
-            //   child: ClipRRect(
-            //     borderRadius: BorderRadius.circular(20),
-            //     //商品画像
-            //     child: ItemImg(itemName: item_name)
-            //   ),
-            // ),
-            const SizedBox(height: 10),
-            const SizedBox(
-              width: double.infinity,
-              child: Text(
-                'トッピング',
-                style: TextStyle(fontSize: 20),
-              ),
-            ),
-            const SizedBox(height: 15),
-            Container(
-              width: 400,
-              height: 200,
-              color: Colors.transparent,
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount:iteminfo.optInfoList.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Stack(
-                    children: [
-                      Card(
-                        child: OptionTile(optInfo: iteminfo.optInfoList[index]),
-                        // child: ListTile(title: Text(karaageOptions[index].optName)),
-                      ),
-                      // Align(
-                        // alignment: Alignment.centerRight,
-                        // child: OptionTile(optInfo: karaageOptions[index]),
-
-                        // child: OptionTile(optInfo: karaageOptions[index])
-                      // ),
-                    ],
-                  );
-                },
-              ),
-            ),
-            const Divider(
-              color: Colors.black,
-              indent: 0,
-              endIndent: 0,
-            ),
-            Column(
-              children: [
-                Row(
+              //見出し
+              (iteminfo.optInfoList.isNotEmpty)
+                ? Container(
+                  width: double.infinity,
+                  margin: const EdgeInsets.symmetric(vertical: 15),
+                  child: const Text(
+                    'トッピング',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ) : Container(),
+              //オプション一覧 iteminfo.optInfoList.length
+              (iteminfo.optInfoList.isNotEmpty)
+                ? Expanded(
+                  child:ListView.separated(
+                    shrinkWrap: true,
+                    itemCount: iteminfo.optInfoList.length,
+                    separatorBuilder: (context, index) => const Divider(),
+                    itemBuilder: (BuildContext context, int index) {
+                      return OptionTile(optInfo: iteminfo.optInfoList[index]);
+                    },
+                  ),
+                ) : const SizedBox(height: 10),
+              const Divider(color: Colors.black,), //インデント?
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
-                      '個数:',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    Container(
-                      child:CounterWidget(),
-                    ),
-                     Text(
-                      '小計：'
-                    ),
-                    Container(
-                      child: SubTotalWidget(),
-                    )
+                    //カウンター
+                    CounterWidget(),
+                    //小計
+                    SubTotalWidget()
                   ],
                 ),
-                Center(
-                  child: SizedBox(
-                    width: 200, //横幅
-                    height: 50, //高さ
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.orange, //背景色
-                        foregroundColor: Colors.white,
-                      ),
-                      onPressed: () {
-                        final cartListController = ref.watch(cartListProvider);
+              ),
 
-                        final cartService = CartListService(cartListController);
-
-                        cartService.addItemToCart(context, ref,iteminfo);
-                        // CartModel();
-                        Navigator.of(context).pop();
-                      },
-                      child: const Text('カートに追加',style: TextStyle(color: Colors.white, fontSize: 20)),
+              //カートに追加ボタン
+              Center(
+                child: SizedBox(
+                  width: 200, //横幅
+                  height: 50, //高さ
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.orange, //背景色
+                      foregroundColor: Colors.white,
                     ),
+                    onPressed: () {
+                      final cartListController = ref.watch(cartListProvider);
+                      final cartService = CartListService(cartListController);
+                      cartService.addItemToCart(context, ref,iteminfo);
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text('カートに追加', style: TextStyle(color: Colors.white, fontSize: 20)),
                   ),
                 ),
-              ],
-            ),
-          ],
+              )
+            ],
+          ),
         ),
       );
     },
