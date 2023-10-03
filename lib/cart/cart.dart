@@ -65,7 +65,10 @@ class CartListService  {
 
   final StateController<List<ItemObj>> _listController;
 
-
+  //リストを返すメソッド
+  List<ItemObj> getCartList() {
+    return _listController.state;
+  }
 
   // リストに要素を追加するメソッド
   void addItem(List<ItemObj> itemList, ItemObj newItem) {
