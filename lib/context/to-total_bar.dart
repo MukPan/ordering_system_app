@@ -1,12 +1,17 @@
+import 'package:cash_register_app/provider/total_counter_provider.dart';
+import 'package:cash_register_app/provider/total_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:provider/provider.dart';
 
 import '../dialog/check_my_orders_dialog.dart';
 import '../pages/confirm_ordering_page.dart'; //上のmaterialと競合を防ぐ
 
 class ToTotalBar extends HookConsumerWidget {
   const ToTotalBar({super.key});
+
+
 
   ///注文内容確認ページへの遷移メソッド
   void moveConfirmOrderingPage(BuildContext context) => {
@@ -17,6 +22,10 @@ class ToTotalBar extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
+    final total = ref.watch(totalProvider);
+    final total_counter = ref.watch(total_counterProvider);
+
     return BottomAppBar(
       shadowColor: Colors.black,
       elevation: 20,
@@ -38,7 +47,7 @@ class ToTotalBar extends HookConsumerWidget {
           Container(
             margin: const EdgeInsets.only(right: 10),
             child: badges.Badge(
-              badgeContent: const Text("2", style: TextStyle(color: Colors.white, fontSize: 15)),
+              badgeContent: Text("${total_counter}", style: TextStyle(color: Colors.white, fontSize: 15)),
               badgeStyle: const badges.BadgeStyle(badgeColor: Colors.red, padding: EdgeInsets.all(8)),
               // position: badges.BadgePosition.,
               child: IconButton(
@@ -50,7 +59,7 @@ class ToTotalBar extends HookConsumerWidget {
           //合計金額
           Container(
             margin: const EdgeInsets.only(left: 20, right: 40),
-            child: const Text("1,000円", style: TextStyle(fontWeight: FontWeight.bold, fontSize:  30)),
+            child:  Text("${total}円", style: TextStyle(fontWeight: FontWeight.bold, fontSize:  30)),
           ),
           //確認ページへの遷移ボタン
           Expanded(
