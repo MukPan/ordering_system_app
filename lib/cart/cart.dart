@@ -73,8 +73,7 @@ class CartListService  {
   // リストに要素を追加するメソッド
   void addItem(List<ItemObj> itemList, ItemObj newItem, WidgetRef ref) {
     itemList.add(newItem);
-    ref.read(cartListProvider.notifier).state = [...itemList];
-    // ref.read(cartListProvider) = itemList;
+    ref.read(cartListProvider.notifier).state = [...itemList]; //itemListから[...itemList]に変更、更新を通知
   }
 
   ///リストの要素を上書きするメソッド
