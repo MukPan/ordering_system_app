@@ -63,32 +63,33 @@ class CartListService  {
 
   CartListService(this._listController);
 
-  final StateController<List<ItemObj>> _listController;
+  final List<ItemObj> _listController;
 
   //リストを返すメソッド
   List<ItemObj> getCartList() {
-    return _listController.state;
+    return _listController;
   }
 
   // リストに要素を追加するメソッド
-  void addItem(List<ItemObj> itemList, ItemObj newItem) {
+  void addItem(List<ItemObj> itemList, ItemObj newItem, WidgetRef ref) {
     itemList.add(newItem);
-    _listController.state = itemList;
+    ref.read(cartListProvider.notifier).state = [...itemList];
+    // ref.read(cartListProvider) = itemList;
   }
 
   ///リストの要素を上書きするメソッド
   ///配列番号を指定して書き換える位置を特定する
   void updateItem(List<ItemObj> itemList, ItemObj newItem, int index, WidgetRef ref) {
     itemList[index] = newItem;
-    _listController.state = itemList;
+    ref.read(cartListProvider.notifier).state = [...itemList];
   }
 
-  // リストから要素を削除するメソッド
-  void removeItem(ItemObj) {
-    final currentList = _listController.state;
-    currentList.remove(ItemObj);
-    _listController.state = currentList;
-  }
+  // // リストから要素を削除するメソッド
+  // void removeItem(ItemObj) {
+  //   final currentList = _listController;
+  //   currentList.remove(ItemObj);
+  //   _listController = currentList;
+  // }
 
   void addItemToCart(BuildContext context,WidgetRef ref,ItemInfo iteminfo) {
 
@@ -109,10 +110,10 @@ class CartListService  {
     );
 
     // CartListService を使用してリストにアイテムを追加
-    addItem(_listController.state, newItem);
+    addItem(_listController, newItem, ref);
 
     final cartListController = ref.read(cartListProvider);
-    final itemList = cartListController.state; // StateControllerの中身を取得
+    final itemList = cartListController; // StateControllerの中身を取得
 
 // リストの中身を出力
     for (int i = 0; i < itemList.length; i++) {
@@ -160,10 +161,10 @@ class CartListService  {
     );
 
     // CartListService を使用してリストにアイテムを更新 //TODO: refを追加
-    updateItem(_listController.state, newItem, cartIndex, ref);
+    updateItem(_listController, newItem, cartIndex, ref);
 
     final cartListController = ref.read(cartListProvider);
-    final itemList = cartListController.state; // StateControllerの中身を取得
+    final itemList = cartListController; // StateControllerの中身を取得
 
 // リストの中身を出力
     for (int i = 0; i < itemList.length; i++) {
