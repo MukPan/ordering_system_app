@@ -14,6 +14,10 @@ final submitOrderListFutureProvider = FutureProvider((ref) async {
   int newOrderNum = -1; // 初期値
 
   for (int retryCount = 0; retryCount < maxRetries; retryCount++) {
+    db2.ref("latestOrderNum/").onValue.listen((DatabaseEvent event) {
+      final data = event.snapshot.value;
+      print("data: $data");
+    });
     // 最新の注文番号を取得し、新しい注文番号の発行(トランザクション)
     TransactionResult result = await db2.ref("latestOrderNum/").runTransaction((Object? mayLatestOrderNum) {
       // nullチェックをするとnullしか返さなくなる
@@ -29,10 +33,12 @@ final submitOrderListFutureProvider = FutureProvider((ref) async {
 
     // トランザクションが成功した場合、ループを終了
     if (result.committed) {
+      print("break");
       break;
       // リトライの間隔を待機
     } else {
       if (retryCount < maxRetries - 1) {
+        print("miss");
         await Future.delayed(Duration(seconds: retryIntervalInSeconds));
       }
     }

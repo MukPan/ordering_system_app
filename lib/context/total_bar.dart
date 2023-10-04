@@ -21,24 +21,24 @@ class TotalBar extends StatelessWidget {
           side: BorderSide(),
         ),
       ),
-      child: Column(
+      child: const Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          const Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TotalCount(),
               TotalAmount(),
             ],
           ),
-          const Spacer(),
+          Spacer(),
           SizedBox(
             width: double.infinity,
             height: 50,
             // margin: EdgeInsets.only(top: 10),
             child: SendOrderBtn(),
           ),
-          const Spacer(),
+          Spacer(),
         ],
       ),
     );
