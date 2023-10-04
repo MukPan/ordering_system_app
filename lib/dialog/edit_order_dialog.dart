@@ -56,13 +56,6 @@ void showEditOrderDialog({ //itemInfo, context, ref
 
   ref.read(amountPerItemProvider.notifier).state = amountPerItem;
 
-  final String item_name = iteminfo.itemName;
-
-  // final amount_per = ref.watch(amountPerItemProvider);
-  // final counter = ref.watch(counterProvider);
-  //
-  // final sub_total = amount_per * counter;
-
   //画面サイズ取得
   final screenWidth = MediaQuery.of(context).size.width;
   final screenHeight = MediaQuery.of(context).size.height;
@@ -131,24 +124,24 @@ void showEditOrderDialog({ //itemInfo, context, ref
               ),
               //見出し
               (iteminfo.optInfoList.isNotEmpty)
-                  ? Container(
-                width: double.infinity,
-                margin: const EdgeInsets.symmetric(vertical: 15),
-                child: const Text(
-                  'トッピング',
-                  style: TextStyle(fontSize: 20, color: Colors.grey),
-                ),
+                ? Container(
+                  width: double.infinity,
+                  margin: const EdgeInsets.symmetric(vertical: 15),
+                  child: const Text(
+                    'トッピング',
+                    style: TextStyle(fontSize: 20, color: Colors.grey),
+                  ),
               ) : Container(),
               //オプション一覧 iteminfo.optInfoList.length
               (iteminfo.optInfoList.isNotEmpty)
-                  ? Expanded(
-                child:ListView.separated(
-                  shrinkWrap: true,
-                  itemCount: iteminfo.optInfoList.length,
-                  separatorBuilder: (context, index) => const Divider(),
-                  itemBuilder: (BuildContext context, int index) {
-                    return OptionTile(optInfo: iteminfo.optInfoList[index]);
-                  },
+                ? Expanded(
+                  child:ListView.separated(
+                    shrinkWrap: true,
+                    itemCount: iteminfo.optInfoList.length,
+                    separatorBuilder: (context, index) => const Divider(),
+                    itemBuilder: (BuildContext context, int index) {
+                      return OptionTile(optInfo: iteminfo.optInfoList[index]);
+                    },
                 ),
               ) : const SizedBox(height: 10),
               const Divider(color: Colors.black,), //インデント?
@@ -158,7 +151,7 @@ void showEditOrderDialog({ //itemInfo, context, ref
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     //カウンター
-                    CounterWidget(),
+                    CounterWidget(displayTrashBtn: true, cartIndex: cartIndex),
                     //小計
                     SubTotalWidget()
                   ],

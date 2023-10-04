@@ -32,6 +32,7 @@ class ItemList extends HookConsumerWidget {
         final String itemName = itemObj.itemName;
         final int itemPrice = itemObj.itemPrice;
         final int qty = itemObj.qty;
+        final int subtotal = itemObj.getSubtotal();
         final List<OptObj> optList = itemObj.optList;
 
         return Padding(
@@ -76,7 +77,10 @@ class ItemList extends HookConsumerWidget {
                     ) : Container(),
 
                     //カウンタ
-                    Text("個数: $qty"),
+                    Container(
+                      margin: const EdgeInsets.only(top: 10),
+                      child: Text("個数 : $qty", style: const TextStyle(fontSize: 20),),
+                    ),
                   ],
                 ),
               ),
@@ -90,7 +94,7 @@ class ItemList extends HookConsumerWidget {
                     //商品画像
                     ItemImg(itemName: itemName),
                     //小計
-                    Subtotal(index: index)
+                    Subtotal(subtotal: subtotal)
                   ],
                 ),
               )
