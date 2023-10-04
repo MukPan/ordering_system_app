@@ -8,11 +8,6 @@ import '../provider/cart_provider.dart';
 
 ///下から注文内容を出すダイアログ
 void showCheckMyOrdersDialog(context, WidgetRef ref) {
-  final cartListController = ref.watch(cartListProvider);
-  final cartService = CartListService(cartListController);
-
-  //かごに入っているリストを取得
-  final List<ItemObj> cartList = cartService.getCartList();
 
   showModalBottomSheet(
     //モーダルの背景の色、透過
@@ -47,7 +42,7 @@ void showCheckMyOrdersDialog(context, WidgetRef ref) {
                 Expanded(
                   child: Container(
                     margin: const EdgeInsets.symmetric(horizontal: 10),
-                    child: ItemList(cartList: cartList),
+                    child: const ItemList(),
                   ),
                 )
               ],

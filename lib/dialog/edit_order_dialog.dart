@@ -178,10 +178,10 @@ void showEditOrderDialog({ //itemInfo, context, ref
                     onPressed: () {
                       final cartListController = ref.watch(cartListProvider);
                       final cartService = CartListService(cartListController);
-                      cartService.addItemToCart(context, ref,iteminfo);
+                      cartService.updateItemToCart(context, ref, iteminfo, cartIndex);
                       Navigator.of(context).pop();
                     },
-                    child: const Text('カートに追加', style: TextStyle(color: Colors.white, fontSize: 20)),
+                    child: const Text('注文を更新', style: TextStyle(color: Colors.white, fontSize: 20)),
                   ),
                 ),
               )

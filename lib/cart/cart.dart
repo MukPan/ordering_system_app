@@ -76,6 +76,13 @@ class CartListService  {
     _listController.state = itemList;
   }
 
+  ///リストの要素を上書きするメソッド
+  ///配列番号を指定して書き換える位置を特定する
+  void updateItem(List<ItemObj> itemList, ItemObj newItem, int index, WidgetRef ref) {
+    itemList[index] = newItem;
+    _listController.state = itemList;
+  }
+
   // リストから要素を削除するメソッド
   void removeItem(ItemObj) {
     final currentList = _listController.state;
@@ -85,16 +92,10 @@ class CartListService  {
 
   void addItemToCart(BuildContext context,WidgetRef ref,ItemInfo iteminfo) {
 
-    final optList = karaageOptions
+    final optList = iteminfo.optInfoList
         .where((optInfo) => ref.read(optIsEnabledFamily(optInfo.optName)) == true )
           .map((optInfo) => OptObj(optName: optInfo.optName, optPrice: optInfo.optPrice))
               .toList();
-    print(optList);
-    // int sum = (iteminfo.optInfoList.isNotEmpty)
-    //     ? iteminfo.optInfoList
-    //       .map((optInfo) => optInfo.optPrice)
-    //       .reduce((sum, price) => sum + price)
-    //     : 0;
 
     final optionObject = ref.watch(optionObjectProvider);
 
@@ -106,8 +107,6 @@ class CartListService  {
       qty: counter,
       optList:optList,
     );
-
-
 
     // CartListService を使用してリストにアイテムを追加
     addItem(_listController.state, newItem);
@@ -139,6 +138,56 @@ class CartListService  {
       print(total);
     }
 
+  }
+  ///配列番号と上書きするitemObjを指定してカートを上書きする
+  // void updateItem(ItemObj newItemObj, int cartIndex) {
+  void updateItemToCart(BuildContext context, WidgetRef ref, ItemInfo iteminfo, int cartIndex) {
+
+    final optList = iteminfo.optInfoList
+        .where((optInfo) => ref.read(optIsEnabledFamily(optInfo.optName)) == true )
+        .map((optInfo) => OptObj(optName: optInfo.optName, optPrice: optInfo.optPrice))
+        .toList();
+
+    final optionObject = ref.watch(optionObjectProvider);
+
+    final counter = ref.watch(counterProvider);
+
+    final ItemObj newItem = ItemObj(
+      itemName: iteminfo.itemName,
+      itemPrice: iteminfo.itemPrice,
+      qty: counter,
+      optList:optList,
+    );
+
+    // CartListService を使用してリストにアイテムを更新 //TODO: refを追加
+    updateItem(_listController.state, newItem, cartIndex, ref);
+
+    final cartListController = ref.read(cartListProvider);
+    final itemList = cartListController.state; // StateControllerの中身を取得
+
+// リストの中身を出力
+    for (int i = 0; i < itemList.length; i++) {
+      final item = itemList[i];
+      print('Item $i:');
+      print('  itemName: ${item.itemName}');
+      print('  itemPrice: ${item.itemPrice}');
+      print('  qty: ${item.qty}');
+      print('  optList: ');
+      for (int j = 0; j < item.optList.length; j++) {
+        final opt = item.optList[j];
+        print('Option $j:');
+        print('optName: ${opt.optName}');
+        print('optPrice: ${opt.optPrice}');
+
+      }
+      final int subtotal = item.getSubtotal();
+      print('小計: $subtotal');
+      // print("test");
+      var total = ref.watch(totalProvider);
+      total = total + subtotal;
+
+      print(total);
+    }
   }
 }
 

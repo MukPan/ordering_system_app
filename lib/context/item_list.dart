@@ -2,6 +2,7 @@ import 'package:cash_register_app/image/image_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../cart/cart.dart';
 import '../component/item_counter.dart';
 import '../component/item_name.dart';
 import '../component/option_name.dart';
@@ -9,14 +10,18 @@ import '../component/subtotal.dart';
 import '../dialog/edit_order_dialog.dart';
 import '../object/item_obj.dart';
 import '../object/opt_obj.dart';
+import '../provider/cart_provider.dart';
 
 class ItemList extends HookConsumerWidget {
-  const ItemList({Key? key, required this.cartList}) : super(key: key);
-
-  final List<ItemObj> cartList;
+  const ItemList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final cartListController = ref.watch(cartListProvider);
+    final cartService = CartListService(cartListController);
+    //かごに入っているリストを取得
+    final List<ItemObj> cartList = cartService.getCartList();
+
     return ListView.separated(
       padding: const EdgeInsets.all(8),
       itemCount: cartList.length,
