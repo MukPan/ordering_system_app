@@ -14,6 +14,6 @@ import '../object/item_obj.dart';
 //   return ref.watch(CartProvider); // 初期状態はlistProviderから取得
 // });
 
-final cartListProvider = StateProvider<StateController<List<ItemObj>>>((ref) {
-  return StateController<List<ItemObj>>([]);
+final cartListProvider = StateProvider<List<ItemObj>>((ref) {
+  return [];
 });

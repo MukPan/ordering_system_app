@@ -12,7 +12,8 @@ class ItemName extends StatelessWidget {
       itemName,
       style: const TextStyle(
           fontWeight: FontWeight.bold,
-          fontSize: 25.0
+          fontSize: 25.0,
+          height: 1
       ),
     );
   }

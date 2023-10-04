@@ -1,8 +1,12 @@
+import 'package:cash_register_app/provider/cart_provider.dart';
 import 'package:cash_register_app/provider/countprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:provider/provider.dart';
+
+import '../dialog/alert_dialog_texts.dart';
+import '../dialog/default_alert_dialog.dart';
 
 
 // class CounterProvider with ChangeNotifier {
@@ -37,6 +41,12 @@ import 'package:provider/provider.dart';
 // }
 
 class CounterWidget extends HookConsumerWidget {
+  const CounterWidget({super.key, this.displayTrashBtn = false, this.cartIndex = 0});
+
+  ///削除ボタンを有効にするか
+  final bool displayTrashBtn;
+  ///編集中のindex
+  final int cartIndex;
 
   void incrementCounter(WidgetRef ref) {
     ref.read(counterProvider.notifier).state++;
@@ -52,8 +62,15 @@ class CounterWidget extends HookConsumerWidget {
     // }
   }
 
+  void removeItem(WidgetRef ref, int cartIndex) {
+    final beforeCartList = ref.read(cartListProvider);
+    beforeCartList.removeAt(cartIndex);
+    //プロバイダーを更新
+    ref.read(cartListProvider.notifier).state = [...beforeCartList];
+  }
+
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     // CounterProviderを取得
     // final counterProvider = Provider.of<CounterProvider>(context);
 
@@ -62,9 +79,36 @@ class CounterWidget extends HookConsumerWidget {
     return Row(
       children: [
         IconButton(
-          icon: const Icon(Icons.remove_circle),
-          onPressed: (counter > 1) ? () {
-            decrement(ref); // ボタンが押されたときにデクリメント
+          icon: (counter <= 1) ? const Icon(Icons.delete) : const Icon(Icons.remove),
+          // onPressed: (counter > 1) ? () {
+          //   decrement(ref); // ボタンが押されたときにデクリメント
+          // } : null,
+          onPressed: ((displayTrashBtn && counter > 0) || counter > 1) ? () async { //qty <= 0 || !countBtnIsEnabled
+            //カウントが1のとき
+            bool isRemove = false;
+            if (counter == 1) {
+              isRemove = await showDialog(
+                  context: context,
+                  builder: (content) => DefaultAlertDialog(
+                    alertDialogTexts: AlertDialogTexts(
+                        title: const Text("商品の削除"),
+                        content: const Text("この商品を注文リストから削除します。\nよろしいですか。")),
+                  )
+              ) ?? false;
+            }
+            //更新
+            if (counter == 1 && isRemove) { //カウントが1かつ削除ボタン実行
+              removeItem(ref, cartIndex);
+              //ダイアログを閉じる
+              if (context.mounted) {
+                Navigator.of(context).pop();
+              }
+              return;
+            }
+            if (counter > 1 || isRemove) {
+              decrement(ref);
+              return;
+            }
           } : null,
         ),
         Text('$counter', style: const TextStyle(fontSize: 20)),

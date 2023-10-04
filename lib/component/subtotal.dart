@@ -7,24 +7,21 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../provider/item_count_family.dart';
 
 class Subtotal extends HookConsumerWidget {
-  Subtotal({Key? key, required this.index}) : super(key: key);
+  Subtotal({Key? key, required this.subtotal}) : super(key: key);
 
-  ///列番号
-  final int index;
+  //小計
+  final int subtotal;
 
   ///値段
   final int amount = math.Random().nextInt(150) * 10;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    //個数
-    final int count = ref.watch(itemCountFamily(index));
-
 
     return Container(
       margin: const EdgeInsets.only(top: 10, right: 10),
       child: Text(
-        "${amount * count}円",
+        "$subtotal円",
         style: const TextStyle(
           fontSize: 20,
         ),
