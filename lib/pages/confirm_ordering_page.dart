@@ -12,7 +12,7 @@ class ConfirmOrderingPage extends StatelessWidget {
     return const Scaffold(
         appBar: DefaultAppBar(title: "注文内容の確認"),
         bottomNavigationBar: TotalBar(), //合計金額表示バー
-        body: ItemList(), //項目リスト //TODO: ItemList()
+        body: ItemList(), //項目リスト
     );
   }
 }

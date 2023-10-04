@@ -1,3 +1,4 @@
+import 'package:cash_register_app/context/send_order_btn.dart';
 import 'package:cash_register_app/context/total_amount.dart';
 import 'package:cash_register_app/context/total_count.dart';
 import 'package:flutter/material.dart';
@@ -35,19 +36,7 @@ class TotalBar extends StatelessWidget {
             width: double.infinity,
             height: 50,
             // margin: EdgeInsets.only(top: 10),
-            child: TextButton(
-                onPressed: () {},
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(Colors.orange),
-                ),
-                child: const Text(
-                  "注文を確定する",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20
-                  ),
-                )
-            ),
+            child: SendOrderBtn(),
           ),
           const Spacer(),
         ],
