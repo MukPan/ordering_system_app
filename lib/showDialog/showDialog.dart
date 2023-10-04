@@ -28,21 +28,35 @@ void showCustomDialog(BuildContext context, WidgetRef ref,ItemInfo iteminfo) {
 
   final int itemPrice = iteminfo.itemPrice;
 
-  final int optsPrice = (iteminfo.optInfoList.isNotEmpty) //!を消した
+
+  //時間なくて条件分岐でゴリ押しました。すいません
+  if (iteminfo.category == "drink"){
+    final int optsPrice = (iteminfo.optInfoList.isNotEmpty) //ドリンクはオプションが無いので!を消す
+
+        ? iteminfo.optInfoList
+        .map((optinfo) => optinfo.optPrice)
+        .reduce((sum, price) => sum + price)
+        : 0;
+    final int amountPerItem = itemPrice + optsPrice;
+    ref.read(amountPerItemProvider.notifier).state = amountPerItem;
+
+  }else {final int optsPrice = (!iteminfo.optInfoList.isNotEmpty) //!を入れることでオプションの有無しを正確な値にしている
       ? iteminfo.optInfoList
       .map((optinfo) => optinfo.optPrice)
       .reduce((sum, price) => sum + price)
       : 0;
   final int amountPerItem = itemPrice + optsPrice;
-
   ref.read(amountPerItemProvider.notifier).state = amountPerItem;
+  }
+
+
+
 
   final String item_name = iteminfo.itemName;
 
-  // final amount_per = ref.watch(amountPerItemProvider);
-  // final counter = ref.watch(counterProvider);
+  final amount_per = ref.watch(amountPerItemProvider);
+  final counter = ref.watch(counterProvider);
 
-  // final sub_total = amount_per * counter;
 
   //画面サイズ取得
   final screenWidth = MediaQuery.of(context).size.width;
@@ -52,9 +66,6 @@ void showCustomDialog(BuildContext context, WidgetRef ref,ItemInfo iteminfo) {
     context: context,
     builder: (BuildContext context) {
 
-      final amount_per = ref.watch(amountPerItemProvider);
-      final counter = ref.watch(counterProvider);
-      final sub_total = amount_per * counter;
       final String item_name = iteminfo.itemName;
 
       print(item_name);

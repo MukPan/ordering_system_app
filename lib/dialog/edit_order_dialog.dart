@@ -47,12 +47,13 @@ void showEditOrderDialog({ //itemInfo, context, ref
 
   final int itemPrice = iteminfo.itemPrice;
 
-  final int optsPrice = (iteminfo.optInfoList.isNotEmpty) //!を消した
+  final int optsPrice = (!iteminfo.optInfoList.isNotEmpty) //!を入れることでオプションの有無しを正確な値にしている
       ? iteminfo.optInfoList
       .map((optinfo) => optinfo.optPrice)
       .reduce((sum, price) => sum + price)
       : 0;
   final int amountPerItem = itemPrice + optsPrice;
+
 
   ref.read(amountPerItemProvider.notifier).state = amountPerItem;
 
@@ -68,6 +69,8 @@ void showEditOrderDialog({ //itemInfo, context, ref
       final counter = ref.watch(counterProvider);
       final sub_total = amount_per * counter;
       final String item_name = iteminfo.itemName;
+
+      print(amount_per);
 
       print(item_name);
 
