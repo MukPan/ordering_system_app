@@ -3,6 +3,7 @@ import 'package:cash_register_app/showDialog/showDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../database/item_infos.dart';
+import '../image/image_asset.dart';
 
 
 
@@ -49,14 +50,16 @@ class Food_page extends HookConsumerWidget {
                   ),
                   onPressed: () {
                     showCustomDialog(context,ref,foodinfo);
-                  }, //押下時ポップアップ
-                  child: const Text( //buttonの中身、商品名や画像、値段など
-                    "button",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                    ),
-                  )
+                  }, //押下時
+                   child: ItemImg(itemName: foodinfo.itemName, size: 120),
+                  // ポップアップ
+                  // child: const Text( //buttonの中身、商品名や画像、値段など
+                  //   "button",
+                  //   style: TextStyle(
+                  //     color: Colors.black,
+                  //     fontSize: 20,
+                  //   ),
+                  // )
               ),
             );
           },

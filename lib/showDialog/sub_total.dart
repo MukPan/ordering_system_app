@@ -19,6 +19,8 @@ class SubTotalWidget extends HookConsumerWidget {
     final amountPer = ref.watch(amountPerItemProvider);
     final counter = ref.watch(counterProvider);
     final subTotal = amountPer * counter;
+
+    print('amount:$amountPer');
     // CounterProviderを取得
     // final counterProvider = Provider.of<CounterProvider>(context);
 

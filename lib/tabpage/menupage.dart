@@ -4,6 +4,7 @@ import 'package:cash_register_app/showDialog/showDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../image/image_asset.dart';
 
 
 class Menu_page extends HookConsumerWidget {
@@ -50,13 +51,7 @@ class Menu_page extends HookConsumerWidget {
                   onPressed: () {
                   showCustomDialog(context,ref,drinkinfo);
                   }, //押下時ポップアップ
-                  child: const Text( //buttonの中身、商品名や画像、値段など
-                    "button",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                    ),
-                  )
+                child: ItemImg(itemName: drinkinfo.itemName, size: 120),
               ),
 
             );
