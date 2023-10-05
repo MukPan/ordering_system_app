@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
 
 
 class Subtotal extends HookConsumerWidget {
@@ -21,9 +22,9 @@ class Subtotal extends HookConsumerWidget {
     return Container(
       margin: const EdgeInsets.only(top: 10, right: 10),
       child: Text(
-        "$subtotal円",
+        "${NumberFormat("#,###").format(subtotal)}円",
         style: TextStyle(
-          fontSize: 20.sp,
+          fontSize: 15.sp,
         ),
       ),
     );

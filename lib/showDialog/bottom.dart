@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
 
 import '../database/item_infos.dart';
 import '../provider/amount_per_item.dart';
@@ -26,7 +27,7 @@ class OptionTile extends HookConsumerWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween, // これで両端に寄せる
       children: [
-        Text("$optName${(optPrice != 0) ? "(+$optPrice円)" : ""}", style: TextStyle(fontSize: 15.sp),),
+        Text("$optName${(optPrice != 0) ? "(+${NumberFormat("#,###").format(optPrice)}円)" : ""}", style: TextStyle(fontSize: 15.sp),),
         ElevatedButton(
             style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.white, //押したときの波動色

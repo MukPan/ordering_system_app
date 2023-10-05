@@ -4,6 +4,7 @@ import 'package:cash_register_app/showDialog/showDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
 
 import '../image/image_asset.dart';
 
@@ -69,7 +70,7 @@ class Menu_page extends HookConsumerWidget {
                     Container(
                       margin: EdgeInsets.symmetric(vertical: 10.h),
                       child: Text(
-                        '${drinkinfo.itemPrice}円',
+                        '${NumberFormat("#,###").format(drinkinfo.itemPrice)}円',
                         style: TextStyle(
                           color: Colors.black,fontSize: 15.sp, ),
                       ),
