@@ -8,16 +8,30 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'database/item_infos.dart';
 import 'firebase_options.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/foundation.dart' show defaultTargetPlatform, kIsWeb;
 
 FirebaseDatabase db = FirebaseDatabase.instance;
 
 
-void main() async {
+///ここを切り替えてエミュレーター起動
+///firebase emulators:start --import=./json --export-on-exit ./json
+const USE_DATABASE_EMULATOR = true;
+const emulatorPort = 9000;
+final emulatorHost = (!kIsWeb && defaultTargetPlatform == TargetPlatform.android)
+    ? '10.0.2.2'
+    : 'localhost';
+
+
+Future<void> main() async {
   //firebase用の初期化
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  //工科展用エミュレーター
+  if (USE_DATABASE_EMULATOR) {
+    FirebaseDatabase.instance.useDatabaseEmulator(emulatorHost, emulatorPort);
+  }
   // debugRepaintRainbowEnabled = true;
 
   //参照用データ初期化(この位置から変えないでね)
