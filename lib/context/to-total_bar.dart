@@ -67,10 +67,12 @@ class ToTotalBar extends HookConsumerWidget {
               width: double.infinity,
               height: 50,
               child: ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(Colors.orange)
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.orange,
                 ),
-                onPressed: () { moveConfirmOrderingPage(context); },
+                onPressed: (total_counter > 0) //注文がある時有効
+                  ? () { moveConfirmOrderingPage(context); }
+                  : null,
                 child: const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 15),
                   child: Text(
