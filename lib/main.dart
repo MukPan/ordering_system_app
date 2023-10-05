@@ -1,8 +1,4 @@
-import 'package:cash_register_app/component/default_app_bar.dart';
-import 'package:cash_register_app/object/item_obj.dart';
-import 'package:cash_register_app/pages/confirm_ordering_page.dart';
 
-import 'package:cash_register_app/showDialog/showDialog.dart';
 import 'package:cash_register_app/tabbar.dart';
 import 'package:firebase_core/firebase_core.dart';
 

@@ -1,13 +1,9 @@
-import 'package:cash_register_app/component/default_app_bar.dart';
-import 'package:cash_register_app/context/item_list.dart';
 import 'package:cash_register_app/pages/confirm_ordering_page.dart';
 import 'package:cash_register_app/showDialog/showDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../common/default_material_state.dart';
 import '../database/item_infos.dart';
 import '../image/image_asset.dart';
-import '../object/item_obj.dart';
 
 
 

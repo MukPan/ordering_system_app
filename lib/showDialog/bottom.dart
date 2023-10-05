@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../database/item_infos.dart';
-import '../object/opt_obj.dart';
 import '../provider/amount_per_item.dart';
-import '../provider/optObj_provider.dart';
 import '../provider/opt_is_enabled.dart';
 
 

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../cart/cart.dart';
-import '../component/item_counter.dart';
 import '../component/item_name.dart';
 import '../component/option_name.dart';
 import '../component/subtotal.dart';

@@ -1,9 +1,7 @@
 import 'package:cash_register_app/provider/cart_provider.dart';
 import 'package:cash_register_app/provider/countprovider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:provider/provider.dart';
 
 import '../dialog/alert_dialog_texts.dart';
 import '../dialog/default_alert_dialog.dart';

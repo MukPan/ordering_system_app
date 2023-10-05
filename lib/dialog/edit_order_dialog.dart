@@ -4,14 +4,11 @@ import 'package:cash_register_app/showDialog/sub_total.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../database/Individual items.dart';
 import '../database/item_infos.dart';
 import '../image/image_asset.dart';
-import '../object/opt_obj.dart';
 import '../provider/amount_per_item.dart';
 import '../provider/countprovider.dart';
 import '../provider/opt_is_enabled.dart';
-import 'package:provider/provider.dart';
 
 import '../cart/cart.dart';
 import '../showDialog/bottom.dart';
@@ -75,14 +72,14 @@ void showEditOrderDialog({ //itemInfo, context, ref
     context: context,
     builder: (BuildContext context) {
 
-      final amount_per = ref.watch(amountPerItemProvider);
+      final amountPer = ref.watch(amountPerItemProvider);
       final counter = ref.watch(counterProvider);
-      final sub_total = amount_per * counter;
-      final String item_name = iteminfo.itemName;
+      final subTotal = amountPer * counter;
+      final String itemName = iteminfo.itemName;
 
-      print(amount_per);
+      print(amountPer);
 
-      print(item_name);
+      print(itemName);
 
       return AlertDialog(
         backgroundColor: Colors.white,
@@ -103,7 +100,7 @@ void showEditOrderDialog({ //itemInfo, context, ref
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             //商品名
-            Text(item_name),
+            Text(itemName),
             //バツボタン
             Container(
               margin: const EdgeInsets.only(top: 5),
@@ -133,7 +130,7 @@ void showEditOrderDialog({ //itemInfo, context, ref
                   border: Border.all(color: Colors.grey),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: ItemImg(itemName: item_name, size: 120),
+                child: ItemImg(itemName: itemName, size: 120),
               ),
               //見出し
               (iteminfo.optInfoList.isNotEmpty)
@@ -166,7 +163,7 @@ void showEditOrderDialog({ //itemInfo, context, ref
                     //カウンター
                     CounterWidget(displayTrashBtn: true, cartIndex: cartIndex),
                     //小計
-                    SubTotalWidget()
+                    const SubTotalWidget()
                   ],
                 ),
               ),

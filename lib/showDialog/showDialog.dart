@@ -1,20 +1,15 @@
-import 'package:cash_register_app/object/item_obj.dart';
 import 'package:cash_register_app/provider/cart_provider.dart';
 import 'package:cash_register_app/showDialog/sub_total.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../database/Individual items.dart';
 import '../database/item_infos.dart';
 import '../image/image_asset.dart';
-import '../object/opt_obj.dart';
 import '../provider/amount_per_item.dart';
 import '../provider/countprovider.dart';
 import '../provider/opt_is_enabled.dart';
 import 'bottom.dart';
 import 'count.dart';
-import 'package:provider/provider.dart';
-import 'cart.dart';
 
 import '../cart/cart.dart';
 
@@ -52,9 +47,9 @@ void showCustomDialog(BuildContext context, WidgetRef ref,ItemInfo iteminfo) {
 
 
 
-  final String item_name = iteminfo.itemName;
+  final String itemName = iteminfo.itemName;
 
-  final amount_per = ref.watch(amountPerItemProvider);
+  final amountPer = ref.watch(amountPerItemProvider);
   final counter = ref.watch(counterProvider);
 
 
@@ -66,9 +61,9 @@ void showCustomDialog(BuildContext context, WidgetRef ref,ItemInfo iteminfo) {
     context: context,
     builder: (BuildContext context) {
 
-      final String item_name = iteminfo.itemName;
+      final String itemName = iteminfo.itemName;
 
-      print(item_name);
+      print(itemName);
 
       return AlertDialog(
         backgroundColor: Colors.white,
@@ -89,7 +84,7 @@ void showCustomDialog(BuildContext context, WidgetRef ref,ItemInfo iteminfo) {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             //商品名
-            Text(item_name),
+            Text(itemName),
             //バツボタン
             Container(
               margin: const EdgeInsets.only(top: 5),
@@ -119,7 +114,7 @@ void showCustomDialog(BuildContext context, WidgetRef ref,ItemInfo iteminfo) {
                   border: Border.all(color: Colors.grey),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: ItemImg(itemName: item_name, size: 120),
+                child: ItemImg(itemName: itemName, size: 120),
               ),
               //見出し
               (iteminfo.optInfoList.isNotEmpty)
@@ -146,7 +141,7 @@ void showCustomDialog(BuildContext context, WidgetRef ref,ItemInfo iteminfo) {
               const Divider(color: Colors.black,), //インデント?
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 10),
-                child: Row(
+                child: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     //カウンター

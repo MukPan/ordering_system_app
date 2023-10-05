@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../provider/item_count_family.dart';
 
 class Subtotal extends HookConsumerWidget {
   Subtotal({Key? key, required this.subtotal}) : super(key: key);
