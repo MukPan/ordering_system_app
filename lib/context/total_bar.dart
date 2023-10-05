@@ -1,3 +1,4 @@
+import 'package:cash_register_app/context/send_order_btn.dart';
 import 'package:cash_register_app/context/total_amount.dart';
 import 'package:cash_register_app/context/total_count.dart';
 import 'package:cash_register_app/provider/total_counter_provider.dart';
@@ -22,22 +23,22 @@ class TotalBar extends HookConsumerWidget {
           side: BorderSide(),
         ),
       ),
-      child: Column(
+      child: const Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          const Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TotalCount(),
               TotalAmount(),
             ],
           ),
-          const Spacer(),
+          Spacer(),
           SizedBox(
             width: double.infinity,
             height: 50,
             // margin: EdgeInsets.only(top: 10),
-            child: TextButton(
+            child: /*TextButton(
                 onPressed: (totalCount > 0)
                   ? () {}
                   : null,
@@ -48,12 +49,13 @@ class TotalBar extends HookConsumerWidget {
                   "注文を確定する",
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 20
+                    fontSize: 20,
+
                   ),
                 )
-            ),
+            ),*/SendOrderBtn()
           ),
-          const Spacer(),
+          Spacer(),
         ],
       ),
     );
