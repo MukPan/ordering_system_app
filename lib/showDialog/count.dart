@@ -81,10 +81,7 @@ class CounterWidget extends HookConsumerWidget {
     return Row(
       children: [
         IconButton(
-          icon: (counter <= 1) ? const Icon(Icons.delete) : const Icon(Icons.remove),
-          // onPressed: (counter > 1) ? () {
-          //   decrement(ref); // ボタンが押されたときにデクリメント
-          // } : null,
+          icon: (counter <= 1) ? const Icon(Icons.delete) : const Icon(Icons.remove_circle),
           onPressed: ((displayTrashBtn && counter > 0) || counter > 1) ? () async { //qty <= 0 || !countBtnIsEnabled
             //カウントが1のとき
             bool isRemove = false;
