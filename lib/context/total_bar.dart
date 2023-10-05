@@ -1,13 +1,15 @@
 import 'package:cash_register_app/context/total_amount.dart';
 import 'package:cash_register_app/context/total_count.dart';
+import 'package:cash_register_app/provider/total_counter_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class TotalBar extends StatelessWidget {
+class TotalBar extends HookConsumerWidget {
   const TotalBar({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final totalCount = ref.watch(total_counterProvider);
     return BottomAppBar(
       shadowColor: Colors.black,
       elevation: 20,
@@ -36,9 +38,11 @@ class TotalBar extends StatelessWidget {
             height: 50,
             // margin: EdgeInsets.only(top: 10),
             child: TextButton(
-                onPressed: () {},
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(Colors.orange),
+                onPressed: (totalCount > 0)
+                  ? () {}
+                  : null,
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.orange
                 ),
                 child: const Text(
                   "注文を確定する",
