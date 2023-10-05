@@ -115,9 +115,9 @@ void showEditOrderDialog({ //itemInfo, context, ref
           ],
         ),
         content: SizedBox(
-          width: screenWidth * 0.7, //7割のサイズ
+          width: (screenWidth * 0.7).w, //7割のサイズ
           height: (iteminfo.optInfoList.isNotEmpty)
-              ? screenHeight * 0.75  //7.5割のサイズ
+              ? (screenHeight * 0.75).h  //7.5割のサイズ
               : null,
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -172,8 +172,8 @@ void showEditOrderDialog({ //itemInfo, context, ref
               //カートに追加ボタン
               Center(
                 child: SizedBox(
-                  width: 200, //横幅
-                  height: 50, //高さ
+                  width: 200.w, //横幅
+                  height: 50.h, //高さ
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.orange, //背景色

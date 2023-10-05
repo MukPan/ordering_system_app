@@ -48,10 +48,10 @@ class SubmissionCompletionPage extends HookConsumerWidget {
                   "ご注文ありがとうございます。\n\n"
                       "こちらの画面を店員に見せて、\n"
                       "会計を完了してください。\n\n"
-                      "ご注文番号\n\n",
+                      "ご注文番号\n",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 25.sp,
+                    fontSize: 20.sp,
                   ),
                 ),
               ),
@@ -62,20 +62,20 @@ class SubmissionCompletionPage extends HookConsumerWidget {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 80.sp,
+                    fontSize: 60.sp,
                   ),
                 ),
               ),
 
               Container(
-                margin: const EdgeInsets.only(top: 30),
+                margin: const EdgeInsets.only(top: 40),
                 child: Text(
                   "ご注文番号はこの後必要です。\n\n"
                       "保存を必ずして下さい。\n",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.red,
-                    fontSize: 25.sp,
+                    fontSize: 20.sp,
                   ),
                 ),
               ),

@@ -37,8 +37,7 @@ class Menu_page extends HookConsumerWidget {
             final List<ItemInfo> drinkinfolist = itemInfos.getList().where((iteminfo) => iteminfo.category == "drink").toList() ;
             final ItemInfo drinkinfo = drinkinfolist[index];
 
-            return
-              Container(
+            return Container(
               margin: const EdgeInsets.all(10),
               child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
@@ -53,27 +52,30 @@ class Menu_page extends HookConsumerWidget {
                   onPressed: () {
                   showCustomDialog(context,ref,drinkinfo);
                   }, //押下時ポップアップ
-                child: Container(
-                  child:Column(
-                    children:[
-                      Text(
-                        '${drinkinfo.itemName}',
+                child: Column(
+                  // crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.symmetric(vertical: 10.h),
+                      child: Text(
+                        drinkinfo.itemName,
                         style: TextStyle(
-                          color: Colors.black,fontSize: 20.sp, //テキストの色
+                          color: Colors.black,fontSize: 15.sp, //テキストの色
 
                         ),
                       ),
-
-                ItemImg(itemName: drinkinfo.itemName, size: 120),
-                      Text(
-            '${drinkinfo.itemPrice}円',
-            style: TextStyle(
-            color: Colors.black,fontSize: 20.sp, ),
+                    ),
+                    Expanded(child: ItemImg(itemName: drinkinfo.itemName, size: 120)),
+                    Container(
+                      margin: EdgeInsets.symmetric(vertical: 10.h),
+                      child: Text(
+                        '${drinkinfo.itemPrice}円',
+                        style: TextStyle(
+                          color: Colors.black,fontSize: 15.sp, ),
                       ),
+                    ),
                   ],
-                  ),
                 ),
-
 
               ),
 
@@ -84,13 +86,5 @@ class Menu_page extends HookConsumerWidget {
 
       ),
     );
-
-    //**邪魔だったり必要なかったらコメントアウト(コードの先頭に//をつける)してね**//
-    floatingActionButton: FloatingActionButton(
-      onPressed: () { moveConfirmOrderingPage(context); },
-      tooltip: "デバッグ用遷移ボタン\n邪魔だったら消してね",
-      child: const Icon(Icons.arrow_right_alt),
-    );
-    //********************************************************************/
   }
 }

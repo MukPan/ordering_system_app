@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../context/item_list.dart';
 
@@ -27,8 +28,8 @@ void showCheckMyOrdersDialog(context, WidgetRef ref) {
               children: [
                 //バー
                 Container(
-                  width: 50,
-                  height: 5,
+                  width: 50.w,
+                  height: 5.h,
                   margin: const EdgeInsets.symmetric(vertical: 20),
                   decoration: BoxDecoration(
                     color: Colors.grey,

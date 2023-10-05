@@ -13,7 +13,7 @@ class ItemName extends StatelessWidget {
       itemName,
       style: TextStyle(
           fontWeight: FontWeight.bold,
-          fontSize: 25.sp,
+          fontSize: 20.sp,
           height: 1
       ),
     );
