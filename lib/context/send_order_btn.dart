@@ -26,7 +26,7 @@ class SendOrderBtn extends StatelessWidget {
           "注文を確定する",
           style: TextStyle(
               color: Colors.white,
-              fontSize: 20.sp
+              fontSize: 15.sp
           ),
         )
     );

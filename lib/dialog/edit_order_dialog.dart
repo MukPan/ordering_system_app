@@ -101,7 +101,7 @@ void showEditOrderDialog({ //itemInfo, context, ref
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             //商品名
-            Text(itemName),
+            Text(itemName, style: TextStyle(fontSize: 20.sp),),
             //バツボタン
             Container(
               margin: const EdgeInsets.only(top: 5),
@@ -140,7 +140,7 @@ void showEditOrderDialog({ //itemInfo, context, ref
                   margin: const EdgeInsets.symmetric(vertical: 15),
                   child: Text(
                     'トッピング',
-                    style: TextStyle(fontSize: 20.sp, color: Colors.grey),
+                    style: TextStyle(fontSize: 15.sp, color: Colors.grey),
                   ),
               ) : Container(),
               //オプション一覧 iteminfo.optInfoList.length
@@ -185,7 +185,7 @@ void showEditOrderDialog({ //itemInfo, context, ref
                       cartService.updateItemToCart(context, ref, iteminfo, cartIndex);
                       Navigator.of(context).pop();
                     },
-                    child: Text('注文を更新', style: TextStyle(color: Colors.white, fontSize: 20.sp)),
+                    child: Text('注文を更新', style: TextStyle(color: Colors.white, fontSize: 15.sp)),
                   ),
                 ),
               )

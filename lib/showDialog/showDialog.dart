@@ -85,7 +85,7 @@ void showCustomDialog(BuildContext context, WidgetRef ref,ItemInfo iteminfo) {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             //商品名
-            Text(itemName),
+            Text(itemName, style: TextStyle(fontSize: 20.sp),),
             //バツボタン
             Container(
               margin: const EdgeInsets.only(top: 5),
@@ -169,7 +169,7 @@ void showCustomDialog(BuildContext context, WidgetRef ref,ItemInfo iteminfo) {
                       cartService.addItemToCart(context, ref,iteminfo);
                       Navigator.of(context).pop();
                     },
-                    child: Text('カートに追加', style: TextStyle(color: Colors.white, fontSize: 20.sp)),
+                    child: Text('カートに追加', style: TextStyle(color: Colors.white, fontSize: 15.sp)),
                   ),
                 ),
               )

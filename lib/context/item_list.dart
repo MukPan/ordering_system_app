@@ -79,7 +79,7 @@ class ItemList extends HookConsumerWidget {
                     //カウンタ
                     Container(
                       margin: const EdgeInsets.only(top: 10),
-                      child: Text("個数 : $qty", style: TextStyle(fontSize: 20.sp),),
+                      child: Text("個数 : $qty", style: TextStyle(fontSize: 15.sp),),
                     ),
                   ],
                 ),

@@ -27,7 +27,7 @@ class SubTotalWidget extends HookConsumerWidget {
 
     return
     Container(
-      child: Text('$subTotal円', style: TextStyle(fontSize: 30.sp, height: 1),),
+      child: Text('$subTotal円', style: TextStyle(fontSize: 25.sp, height: 1),),
     );
   }
 }

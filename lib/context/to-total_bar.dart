@@ -80,7 +80,7 @@ class ToTotalBar extends HookConsumerWidget {
                     "レジに進む",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                        fontSize: 20.sp,
+                        fontSize: 15.sp,
                         // fontWeight: FontWeight.bold,
                         color: Colors.white
                     ),
