@@ -1,0 +1,102 @@
+{
+  "items": {
+    "たこ焼き": {
+      "category": "food",
+      "options": [
+        "焼きチーズ",
+        "ソース",
+        "マヨネーズ"
+      ],
+      "price": 300
+    },
+    "コーラ": {
+      "category": "drink",
+      "price": 100
+    },
+    "ポテト": {
+      "category": "food",
+      "options": [
+        "焼きチーズ",
+        "塩",
+        "マヨネーズ",
+        "ケチャップ"
+      ],
+      "price": 200
+    },
+    "唐揚げ": {
+      "category": "food",
+      "options": [
+        "焼きチーズ",
+        "マヨネーズ",
+        "ケチャップ"
+      ],
+      "price": 400
+    }
+  },
+  "latestOrderNum": {
+    "10": "d51e8b0f-feee-40ed-967b-451bcfa08c5e"
+  },
+  "moneyCount": {
+    "tmpTotalCountMap": {
+      "1,000円": 0,
+      "10,000円": 0,
+      "100円": 0,
+      "10円": 0,
+      "1円": 0,
+      "5,000円": 0,
+      "500円": 0,
+      "50円": 0,
+      "5円": 0
+    },
+    "totalCountMap": {
+      "1,000円": 10,
+      "10,000円": 3,
+      "100円": 50,
+      "10円": 50,
+      "1円": 20,
+      "5,000円": 3,
+      "500円": 20,
+      "50円": 20,
+      "5円": 20
+    }
+  },
+  "options": {
+    "ケチャップ": {
+      "price": 0
+    },
+    "ソース": {
+      "price": 0
+    },
+    "マヨネーズ": {
+      "price": 0
+    },
+    "塩": {
+      "price": 0
+    },
+    "焼きチーズ": {
+      "price": 100
+    }
+  },
+  "orderNums": {
+    "0": {
+      "orderList": {
+        "-NfvA8aCsep9tDujdTh9": {
+          "item": "ポテト",
+          "qty": 0
+        }
+      },
+      "orderStatus": "gave",
+      "timestamp": 0
+    },
+    "2": {
+      "orderList": {
+        "-Ng0IfkPCICj_6EjFMBn": {
+          "item": "ポテト",
+          "qty": 0
+        }
+      },
+      "orderStatus": "gave",
+      "timestamp": 0
+    }
+  }
+}
