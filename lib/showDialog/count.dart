@@ -1,3 +1,5 @@
+import 'package:cash_register_app/database/item_infos.dart';
+import 'package:cash_register_app/pages/total_counter.dart';
 import 'package:cash_register_app/provider/cart_provider.dart';
 import 'package:cash_register_app/provider/countprovider.dart';
 import 'package:flutter/material.dart';
@@ -47,6 +49,8 @@ class CounterWidget extends HookConsumerWidget {
   final bool displayTrashBtn;
   ///編集中のindex
   final int cartIndex;
+
+
 
   void incrementCounter(WidgetRef ref) {
     ref.read(counterProvider.notifier).state++;
@@ -101,6 +105,7 @@ class CounterWidget extends HookConsumerWidget {
               removeItem(ref, cartIndex);
               //ダイアログを閉じる
               if (context.mounted) {
+                total_counter(context, ref);
                 Navigator.of(context).pop();
               }
               return;
