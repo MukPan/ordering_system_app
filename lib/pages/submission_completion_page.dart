@@ -2,6 +2,7 @@ import 'package:cash_register_app/component/default_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../component/default_circular_progress_indicator.dart';
 import '../database/submit_order_list_future_provider.dart';
 
 
@@ -17,7 +18,7 @@ class SubmissionCompletionPage extends HookConsumerWidget {
 
     //DBに送信するまで待機
     return newOrderNumAsyVal.when(
-      loading: () => const CircularProgressIndicator(),
+      loading: () => const DefaultCircularProgressIndicator(),
       error: (err, stack) => Container(),
       data: (newOrderNum) {
         print("newOrderNum: $newOrderNum");
@@ -31,8 +32,9 @@ class SubmissionCompletionPage extends HookConsumerWidget {
           );
         }
         return Scaffold(
-          appBar: const DefaultAppBar(title: "注文完了",
-              // displayBackBtn: false
+          appBar: const DefaultAppBar(
+            title: "注文完了",
+            displayBackBtn: false
           ),
           body: Column(
             // mainAxisAlignment: MainAxisAlignment.center,
