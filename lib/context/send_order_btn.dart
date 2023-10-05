@@ -1,5 +1,6 @@
 import 'package:cash_register_app/pages/submission_completion_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SendOrderBtn extends StatelessWidget {
   const SendOrderBtn({Key? key}) : super(key: key);
@@ -21,11 +22,11 @@ class SendOrderBtn extends StatelessWidget {
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all<Color>(Colors.orange),
         ),
-        child: const Text(
+        child: Text(
           "注文を確定する",
           style: TextStyle(
               color: Colors.white,
-              fontSize: 20
+              fontSize: 15.sp
           ),
         )
     );

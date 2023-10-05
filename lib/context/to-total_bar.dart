@@ -2,7 +2,9 @@ import 'package:cash_register_app/provider/total_counter_provider.dart';
 import 'package:cash_register_app/provider/total_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
 
 import '../dialog/check_my_orders_dialog.dart';
 import '../pages/confirm_ordering_page.dart';
@@ -41,13 +43,13 @@ class ToTotalBar extends HookConsumerWidget {
       child: Row(
         // mainAxisAlignment: MainAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        textDirection: TextDirection.ltr,
+        // textDirection: TextDirection.ltr,
         children: [
           //カートアイコン
           Container(
             margin: const EdgeInsets.only(right: 10),
             child: badges.Badge(
-              badgeContent: Text("$totalCounter", style: const TextStyle(color: Colors.white, fontSize: 15)),
+              badgeContent: Text("$totalCounter", style: TextStyle(color: Colors.white, fontSize: 12.sp)),
               badgeStyle: const badges.BadgeStyle(badgeColor: Colors.red, padding: EdgeInsets.all(8)),
               // position: badges.BadgePosition.,
               child: IconButton(
@@ -59,7 +61,7 @@ class ToTotalBar extends HookConsumerWidget {
           //合計金額
           Container(
             margin: const EdgeInsets.only(left: 20, right: 40),
-            child:  Text("$total円", style: const TextStyle(fontWeight: FontWeight.bold, fontSize:  30)),
+            child:  Text("${NumberFormat("#,###").format(total)}円", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30.sp)),
           ),
           //確認ページへの遷移ボタン
           Expanded(
@@ -73,13 +75,13 @@ class ToTotalBar extends HookConsumerWidget {
                 onPressed: (totalCounter > 0) //注文がある時有効
                   ? () { moveConfirmOrderingPage(context); }
                   : null,
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Text(
                     "レジに進む",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 15.sp,
                         // fontWeight: FontWeight.bold,
                         color: Colors.white
                     ),
