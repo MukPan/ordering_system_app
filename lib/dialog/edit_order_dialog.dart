@@ -44,25 +44,15 @@ void showEditOrderDialog({ //itemInfo, context, ref
 
   final int itemPrice = iteminfo.itemPrice;
 
-  //時間なくて条件分岐でゴリ押しました。すいません
-  if (iteminfo.category == "drink"){
-    final int optsPrice = (iteminfo.optInfoList.isNotEmpty) //ドリンクはオプションが無いので!を消す
 
-        ? iteminfo.optInfoList
-        .map((optinfo) => optinfo.optPrice)
-        .reduce((sum, price) => sum + price)
-        : 0;
-    final int amountPerItem = itemPrice + optsPrice;
-    ref.read(amountPerItemProvider.notifier).state = amountPerItem;
-
-  }else {final int optsPrice = (!iteminfo.optInfoList.isNotEmpty) //!を入れることでオプションの有無しを正確な値にしている
+  final int optsPrice = (iteminfo.optInfoList.isNotEmpty)
       ? iteminfo.optInfoList
       .map((optinfo) => optinfo.optPrice)
       .reduce((sum, price) => sum + price)
       : 0;
   final int amountPerItem = itemPrice + optsPrice;
   ref.read(amountPerItemProvider.notifier).state = amountPerItem;
-  }
+
 
   //画面サイズ取得
   final screenWidth = MediaQuery.of(context).size.width;

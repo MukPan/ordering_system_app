@@ -44,6 +44,8 @@ class ItemObj {
         .reduce((sum, price) => sum + price)
       :0;
 
+    print('オプション:${optsPrice}');
+
     return qty * (itemPrice + optsPrice);
   }
 }
