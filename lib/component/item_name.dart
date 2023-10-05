@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ItemName extends StatelessWidget {
   const ItemName({Key? key, required this.itemName}) : super(key: key);
@@ -10,9 +11,9 @@ class ItemName extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       itemName,
-      style: const TextStyle(
+      style: TextStyle(
           fontWeight: FontWeight.bold,
-          fontSize: 25.0,
+          fontSize: 25.sp,
           height: 1
       ),
     );

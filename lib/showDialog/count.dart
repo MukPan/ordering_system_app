@@ -3,6 +3,7 @@ import 'package:cash_register_app/pages/total_counter.dart';
 import 'package:cash_register_app/provider/cart_provider.dart';
 import 'package:cash_register_app/provider/countprovider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../dialog/alert_dialog_texts.dart';
@@ -111,7 +112,7 @@ class CounterWidget extends HookConsumerWidget {
             }
           } : null,
         ),
-        Text('$counter', style: const TextStyle(fontSize: 20)),
+        Text('$counter', style: TextStyle(fontSize: 20.sp)),
         IconButton(
           icon: const Icon(Icons.add_circle),
           onPressed:  (counter < 5) ? () {

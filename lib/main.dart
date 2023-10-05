@@ -3,6 +3,7 @@ import 'package:cash_register_app/tabbar.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'database/item_infos.dart';
@@ -48,7 +49,13 @@ Future<void> main() async {
   //   }
   // }
 
-  runApp(const ProviderScope(child: MyApp()));
+  // runApp(const ProviderScope(child: MyApp()));
+  runApp(
+    ScreenUtilInit(
+      designSize: const Size(390, 844), //iPhone12: これあってる?いる?
+      builder: (context, _) => const ProviderScope(child: MyApp()),
+    )
+  );
 }
 
 class MyApp extends StatelessWidget {

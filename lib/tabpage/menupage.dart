@@ -2,6 +2,7 @@ import 'package:cash_register_app/database/item_infos.dart';
 import 'package:cash_register_app/pages/confirm_ordering_page.dart';
 import 'package:cash_register_app/showDialog/showDialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../image/image_asset.dart';
@@ -58,7 +59,7 @@ class Menu_page extends HookConsumerWidget {
                       Text(
                         '${drinkinfo.itemName}',
                         style: TextStyle(
-                          color: Colors.black,fontSize: 20, //テキストの色
+                          color: Colors.black,fontSize: 20.sp, //テキストの色
 
                         ),
                       ),
@@ -67,7 +68,7 @@ class Menu_page extends HookConsumerWidget {
                       Text(
             '${drinkinfo.itemPrice}円',
             style: TextStyle(
-            color: Colors.black,fontSize: 20, ),
+            color: Colors.black,fontSize: 20.sp, ),
                       ),
                   ],
                   ),

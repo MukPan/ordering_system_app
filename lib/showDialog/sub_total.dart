@@ -1,5 +1,6 @@
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../provider/amount_per_item.dart';
@@ -26,7 +27,7 @@ class SubTotalWidget extends HookConsumerWidget {
 
     return
     Container(
-      child: Text('$subTotal円', style: const TextStyle(fontSize: 30, height: 1),),
+      child: Text('$subTotal円', style: TextStyle(fontSize: 30.sp, height: 1),),
     );
   }
 }

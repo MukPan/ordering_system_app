@@ -1,6 +1,7 @@
 import 'package:cash_register_app/pages/confirm_ordering_page.dart';
 import 'package:cash_register_app/showDialog/showDialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../database/item_infos.dart';
 import '../image/image_asset.dart';
@@ -66,7 +67,7 @@ class Food_page extends HookConsumerWidget {
                       Text(
                         '${foodinfo.itemPrice}円',
                         style: TextStyle(
-                          color: Colors.black,fontSize: 20, ),
+                          color: Colors.black,fontSize: 20.sp, ),
                       ),
                     ],
                   ),

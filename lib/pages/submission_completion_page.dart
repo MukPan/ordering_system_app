@@ -1,5 +1,6 @@
 import 'package:cash_register_app/component/default_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../component/default_circular_progress_indicator.dart';
@@ -43,14 +44,14 @@ class SubmissionCompletionPage extends HookConsumerWidget {
             children: [
               Container(
                 margin: const EdgeInsets.only(top: 30),
-                child: const Text(
+                child: Text(
                   "ご注文ありがとうございます。\n\n"
                       "こちらの画面を店員に見せて、\n"
                       "会計を完了してください。\n\n"
                       "ご注文番号\n\n",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 25,
+                    fontSize: 25.sp,
                   ),
                 ),
               ),
@@ -59,22 +60,22 @@ class SubmissionCompletionPage extends HookConsumerWidget {
                 child: Text(
                   newOrderNum.toString(),
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 80,
+                    fontSize: 80.sp,
                   ),
                 ),
               ),
 
               Container(
                 margin: const EdgeInsets.only(top: 30),
-                child: const Text(
+                child: Text(
                   "ご注文番号はこの後必要です。\n\n"
                       "保存を必ずして下さい。\n",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.red,
-                    fontSize: 25,
+                    fontSize: 25.sp,
                   ),
                 ),
               ),

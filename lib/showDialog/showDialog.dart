@@ -2,6 +2,7 @@ import 'package:cash_register_app/provider/cart_provider.dart';
 import 'package:cash_register_app/showDialog/sub_total.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../database/item_infos.dart';
 import '../image/image_asset.dart';
@@ -68,11 +69,11 @@ void showCustomDialog(BuildContext context, WidgetRef ref,ItemInfo iteminfo) {
       return AlertDialog(
         backgroundColor: Colors.white,
         surfaceTintColor: Colors.white,
-        titleTextStyle: const TextStyle(
-          fontSize: 30,
+        titleTextStyle: TextStyle(
+          fontSize: 30.sp,
         ),
-        contentTextStyle: const TextStyle(
-          fontSize: 20,
+        contentTextStyle: TextStyle(
+          fontSize: 20.sp,
         ),
         titlePadding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
         contentPadding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
@@ -121,9 +122,9 @@ void showCustomDialog(BuildContext context, WidgetRef ref,ItemInfo iteminfo) {
                 ? Container(
                   width: double.infinity,
                   margin: const EdgeInsets.symmetric(vertical: 15),
-                  child: const Text(
+                  child: Text(
                     'トッピング',
-                    style: TextStyle(fontSize: 20, color: Colors.grey),
+                    style: TextStyle(fontSize: 20.sp, color: Colors.grey),
                   ),
                 ) : Container(),
               //オプション一覧 iteminfo.optInfoList.length
@@ -168,7 +169,7 @@ void showCustomDialog(BuildContext context, WidgetRef ref,ItemInfo iteminfo) {
                       cartService.addItemToCart(context, ref,iteminfo);
                       Navigator.of(context).pop();
                     },
-                    child: const Text('カートに追加', style: TextStyle(color: Colors.white, fontSize: 20)),
+                    child: Text('カートに追加', style: TextStyle(color: Colors.white, fontSize: 20.sp)),
                   ),
                 ),
               )

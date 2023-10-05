@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../object/opt_obj.dart';
 
@@ -14,8 +15,8 @@ class OptionName extends StatelessWidget {
     final optprice = optObj.optPrice;
     return Text(
       "$optName${(optprice != 0) ? '($optprice円)' : ''}",
-      style: const TextStyle(
-          fontSize: 15.0,
+      style: TextStyle(
+          fontSize: 15.sp,
           color: CupertinoColors.systemGrey
       ),
     );

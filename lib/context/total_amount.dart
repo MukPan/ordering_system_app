@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../provider/total_provider.dart';
@@ -12,7 +13,7 @@ class TotalAmount extends HookConsumerWidget {
     return  Text(
       "${total}円",
       style: TextStyle(
-          fontSize: 40,
+          fontSize: 40.sp,
           fontWeight: FontWeight.bold
       ),
     );
