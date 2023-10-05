@@ -16,7 +16,7 @@ FirebaseDatabase db = FirebaseDatabase.instance;
 
 ///ここを切り替えてエミュレーター起動
 ///firebase emulators:start --import=./json --export-on-exit ./json
-const USE_DATABASE_EMULATOR = false;
+const USE_DATABASE_EMULATOR = true;
 const emulatorPort = 9000;
 final emulatorHost = (!kIsWeb && defaultTargetPlatform == TargetPlatform.android)
     ? '10.0.2.2'
