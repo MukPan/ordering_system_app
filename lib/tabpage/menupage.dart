@@ -38,7 +38,8 @@ class Menu_page extends HookConsumerWidget {
             final List<ItemInfo> drinkinfolist = itemInfos.getList().where((iteminfo) => iteminfo.category == "drink").toList() ;
             final ItemInfo drinkinfo = drinkinfolist[index];
 
-            return Container(
+            return
+              Container(
               margin: const EdgeInsets.all(10),
               child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
@@ -53,8 +54,30 @@ class Menu_page extends HookConsumerWidget {
                   onPressed: () {
                   showCustomDialog(context,ref,drinkinfo);
                   }, //押下時ポップアップ
-                child: ItemImg(itemName: drinkinfo.itemName, size: 120),
+                child: Container(
+                  child:Column(
+                    children:[
+                      Text(
+                        '${drinkinfo.itemName}',
+                        style: TextStyle(
+                          color: Colors.black,fontSize: 20, //テキストの色
+
+                        ),
+                      ),
+
+                ItemImg(itemName: drinkinfo.itemName, size: 120),
+                      Text(
+            '${drinkinfo.itemPrice}円',
+            style: TextStyle(
+            color: Colors.black,fontSize: 20, ),
+                      ),
+                  ],
+                  ),
+                ),
+
+
               ),
+
 
             );
           },

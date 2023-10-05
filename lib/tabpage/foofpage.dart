@@ -55,7 +55,26 @@ class Food_page extends HookConsumerWidget {
                   onPressed: () {
                     showCustomDialog(context,ref,foodinfo);
                   }, //押下時
-                   child: ItemImg(itemName: foodinfo.itemName, size: 120),
+                child: Container(
+                  child:Column(
+                    children:[
+                      Text(
+                        '${foodinfo.itemName}',
+                        style: TextStyle(
+                          color: Colors.black,fontSize: 20, //テキストの色
+
+                        ),
+                      ),
+
+                      ItemImg(itemName: foodinfo.itemName, size: 120),
+                      Text(
+                        '${foodinfo.itemPrice}円',
+                        style: TextStyle(
+                          color: Colors.black,fontSize: 20, ),
+                      ),
+                    ],
+                  ),
+                ),
                   // ポップアップ
                   // child: const Text( //buttonの中身、商品名や画像、値段など
                   //   "button",
