@@ -62,7 +62,21 @@ class SubmissionCompletionPage extends HookConsumerWidget {
                     fontSize: 80,
                   ),
                 ),
-              )
+              ),
+
+              Container(
+                margin: const EdgeInsets.only(top: 30),
+                child: const Text(
+                  "ご注文番号はこの後必要です。\n\n"
+                      "保存を必ずして下さい。\n",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.red,
+                    fontSize: 25,
+                  ),
+                ),
+              ),
+
             ],
           ), //項目リスト
         );
