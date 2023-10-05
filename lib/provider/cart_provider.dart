@@ -1,7 +1,5 @@
-import 'package:cash_register_app/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../cart/cart.dart';
 import '../object/item_obj.dart';
 
 // // リストの初期値を提供するProvider

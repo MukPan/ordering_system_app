@@ -1,14 +1,11 @@
-import 'dart:html';
 
 import 'package:cash_register_app/object/item_obj.dart';
 import 'package:cash_register_app/provider/opt_is_enabled.dart';
 import 'package:cash_register_app/provider/total_counter_provider.dart';
 import 'package:cash_register_app/provider/total_provider.dart';
-import 'package:cash_register_app/showDialog/count.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../database/Individual items.dart';
 import '../database/item_infos.dart';
 import '../object/opt_obj.dart';
 import '../provider/cart_provider.dart';
@@ -114,8 +111,8 @@ class CartListService  {
 
     final cartListController = ref.read(cartListProvider);
     final itemList = cartListController; // StateControllerの中身を取得
-    var sub_total_counter = 0;
-    var total_qtr = 0;
+    var subTotalCounter = 0;
+    var totalQtr = 0;
 
 // リストの中身を出力
     for (int i = 0; i < itemList.length; i++) {
@@ -135,22 +132,22 @@ class CartListService  {
       final int subtotal = item.getSubtotal();
       print('小計: $subtotal');
       // print("test");
-      sub_total_counter = sub_total_counter + subtotal;
-      total_qtr = total_qtr + item.qty;
+      subTotalCounter = subTotalCounter + subtotal;
+      totalQtr = totalQtr + item.qty;
 
     }
     ref.read(totalProvider.notifier).state =0;
     ref.read(total_counterProvider.notifier).state = 0;
-    ref.read(totalProvider.notifier).state = ref.read(totalProvider.notifier).state + sub_total_counter;
-    ref.read(total_counterProvider.notifier).state = ref.read(total_counterProvider.notifier).state + total_qtr;
-    sub_total_counter = 0;
-    total_qtr = 0;
+    ref.read(totalProvider.notifier).state = ref.read(totalProvider.notifier).state + subTotalCounter;
+    ref.read(total_counterProvider.notifier).state = ref.read(total_counterProvider.notifier).state + totalQtr;
+    subTotalCounter = 0;
+    totalQtr = 0;
     final total = ref.watch(totalProvider);
-    final total_counter = ref.watch(total_counterProvider);
+    final totalCounter = ref.watch(total_counterProvider);
 
 
-    print('合計:${total}');
-    print('カウント：${total_counter}');
+    print('合計:$total');
+    print('カウント：$totalCounter');
 
   }
   ///配列番号と上書きするitemObjを指定してカートを上書きする

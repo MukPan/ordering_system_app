@@ -1,6 +1,5 @@
 import 'package:cash_register_app/dialog/alert_dialog_texts.dart';
 import 'package:cash_register_app/dialog/default_alert_dialog.dart';
-import 'package:cash_register_app/dialog/remove_item_alert_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../provider/item_count_family.dart';

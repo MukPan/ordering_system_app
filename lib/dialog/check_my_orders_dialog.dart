@@ -1,10 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../cart/cart.dart';
 import '../context/item_list.dart';
-import '../object/item_obj.dart';
-import '../provider/cart_provider.dart';
 
 ///下から注文内容を出すダイアログ
 void showCheckMyOrdersDialog(context, WidgetRef ref) {
