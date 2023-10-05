@@ -28,10 +28,13 @@ final submitOrderListFutureProvider = FutureProvider((ref) async {
       if (mayLatestOrderNum == null) {
         return Transaction.abort();
       }
-      final latestOrderNum = mayLatestOrderNum is String ||
-              mayLatestOrderNum is int
+      // final int latestOrderNum = (mayLatestOrderNum is int)
+      //   ? mayLatestOrderNum
+      //   : int.parse(mayLatestOrderNum.toString());
+
+      final latestOrderNum = mayLatestOrderNum is String
           ? int.parse(mayLatestOrderNum.toString())
-          : int.parse((mayLatestOrderNum as Map).keys.elementAt(0).toString());
+          : int.parse((mayLatestOrderNum as Map<String, dynamic>).keys.elementAt(0).toString());
       // 新しい注文番号を発行
       newOrderNum = latestOrderNum + 1;
       // 新しいデータを返す
