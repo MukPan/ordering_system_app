@@ -134,6 +134,7 @@ void showCustomDialog(BuildContext context, WidgetRef ref, ItemInfo iteminfo) {
                           //オプション一覧 iteminfo.optInfoList.length
                           (iteminfo.optInfoList.isNotEmpty)
                               ? ListView.separated(
+                            physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             itemCount: iteminfo.optInfoList.length,
                             separatorBuilder: (context, index) =>
