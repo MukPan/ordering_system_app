@@ -35,6 +35,8 @@ class ItemList extends HookConsumerWidget {
         final int subtotal = itemObj.getSubtotal();
         final List<OptObj> optList = itemObj.optList;
 
+        print('adad:${subtotal}');
+
         return Padding(
           padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
           child: Row(
