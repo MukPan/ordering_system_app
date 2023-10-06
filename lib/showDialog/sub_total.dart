@@ -28,7 +28,7 @@ class SubTotalWidget extends HookConsumerWidget {
 
     return
     Container(
-      child: Text('${NumberFormat("#,###").format(subTotal)}円', style: TextStyle(fontSize: 25.sp, height: 1),),
+      child: Text('${NumberFormat("#,###").format(subTotal)}円', style: TextStyle(fontSize: 25.sp, height: 1.sp),),
     );
   }
 }

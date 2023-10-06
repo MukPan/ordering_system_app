@@ -7,8 +7,6 @@ import '../database/item_infos.dart';
 import '../provider/amount_per_item.dart';
 import '../provider/opt_is_enabled.dart';
 
-
-
 class OptionTile extends HookConsumerWidget {
   const OptionTile({Key? key, required this.optInfo}) : super(key: key);
 
@@ -27,33 +25,44 @@ class OptionTile extends HookConsumerWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween, // これで両端に寄せる
       children: [
-        Text("$optName${(optPrice != 0) ? "(+${NumberFormat("#,###").format(optPrice)}円)" : ""}", style: TextStyle(fontSize: 15.sp),),
-        ElevatedButton(
-            style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.white, //押したときの波動色
-                backgroundColor: (isEnabled) ? Colors.orange : Colors.grey
-            ),
-            onPressed: () {
-              // 1. オプションの有効/無効状態を取得
-              final bool isEnabledNow = ref.read(optIsEnabledFamily(optName));
-              // // 2. "あり" の場合にのみオブジェクトを更新
-              // if (!isEnabledNow) {
-              //   print("ボタン");
-              //   // 3. オプション情報をプロバイダーを介して更新
-              //   updateOptionObject(ref, optName, optPrice.toDouble());
-              // }else{
-              //   ref.read(optionObjectProvider.notifier).state = null;
-              // }
-              // 4. 有効/無効の切り替えと価格の更新を行う
-              ref.read(optIsEnabledFamily(optName).notifier).state = !isEnabledNow;
-              ref.read(amountPerItemProvider.notifier).state += (isEnabledNow) ? -optPrice : optPrice;
-            },
-            child: Text(
-              (isEnabled) ? "あり" : "なし",
-              style: const TextStyle(
-                color: Colors.white
-              ),
-            )
+        Text(
+          "$optName${(optPrice != 0) ? "(+${NumberFormat("#,###").format(optPrice)}円)" : ""}",
+          style: TextStyle(fontSize: 15.sp),
+        ),
+        SizedBox(
+          width: 80.w,
+          height: 40.h,
+          child: FittedBox(
+            child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.white, //押したときの波動色
+                    backgroundColor: (isEnabled) ? Colors.orange : Colors.grey),
+                onPressed: () {
+                  // 1. オプションの有効/無効状態を取得
+                  final bool isEnabledNow =
+                      ref.read(optIsEnabledFamily(optName));
+                  // // 2. "あり" の場合にのみオブジェクトを更新
+                  // if (!isEnabledNow) {
+                  //   print("ボタン");
+                  //   // 3. オプション情報をプロバイダーを介して更新
+                  //   updateOptionObject(ref, optName, optPrice.toDouble());
+                  // }else{
+                  //   ref.read(optionObjectProvider.notifier).state = null;
+                  // }
+                  // 4. 有効/無効の切り替えと価格の更新を行う
+                  ref.read(optIsEnabledFamily(optName).notifier).state =
+                      !isEnabledNow;
+                  ref.read(amountPerItemProvider.notifier).state +=
+                      (isEnabledNow) ? -optPrice : optPrice;
+                },
+                child: Text(
+                  (isEnabled) ? "あり" : "なし",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 15.sp,
+                  ),
+                )),
+          ),
         ),
       ],
     );
