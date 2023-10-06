@@ -43,6 +43,9 @@ void showEditOrderDialog({ //itemInfo, context, ref
   for (final optName in targetItemObj.optList.map((optInfo) => optInfo.optName)) {
     ref.read(optIsEnabledFamily(optName).notifier).state = true;
   }
+
+  // iteminfo.optInfoList.forEach((element) {print(ref.read(optIsEnabledFamily(element.optName)));});
+
   //元のカウントを反映
   ref.read(counterProvider.notifier).state = targetItemObj.qty;
 
@@ -60,8 +63,10 @@ void showEditOrderDialog({ //itemInfo, context, ref
     ref.read(amountPerItemProvider.notifier).state = amountPerItem;
   } else {
     final int optsPrice =
-    (!iteminfo.optInfoList.isNotEmpty) //!を入れることでオプションの有無しを正確な値にしている
+    // (!iteminfo.optInfoList.isNotEmpty) //!を入れることでオプションの有無しを正確な値にしている
+    (iteminfo.optInfoList.isNotEmpty && iteminfo.optInfoList.any((optInfo) => ref.read(optIsEnabledFamily(optInfo.optName)) == true)) //!を入れることでオプションの有無しを正確な値にしている
         ? iteminfo.optInfoList
+        .where((optInfo) => ref.read(optIsEnabledFamily(optInfo.optName)) == true)
         .map((optinfo) => optinfo.optPrice)
         .reduce((sum, price) => sum + price)
         : 0;
@@ -153,6 +158,7 @@ void showEditOrderDialog({ //itemInfo, context, ref
                           //オプション一覧 iteminfo.optInfoList.length
                           (iteminfo.optInfoList.isNotEmpty)
                               ? ListView.separated(
+                            physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             itemCount: iteminfo.optInfoList.length,
                             separatorBuilder: (context, index) =>
