@@ -196,7 +196,7 @@ void showEditOrderDialog({ //itemInfo, context, ref
                     onPressed: () {
                     final cartListController = ref.watch(cartListProvider);
                     final cartService = CartListService(cartListController);
-                    cartService.addItemToCart(context, ref, iteminfo);
+                    cartService.updateItemToCart(context, ref, iteminfo,cartIndex);
                     Navigator.of(context).pop();
                   },
                   ),
