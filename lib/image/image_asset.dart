@@ -18,12 +18,12 @@ class ItemImg extends StatelessWidget {
 
   static const _itemImgPathMap = {
     "唐揚げ" : "images/karaage.png",
-    "たこ焼き" : "images/takoyaki.png",
+    "揚げたこ焼き" : "images/takoyaki.png",
     "ポテト" : "images/potato.png",
     "コーラ" : "images/cola.png",
     "ファンタオレンジ" : "images/fanta_orange.png",
     "ファンタグレープ" : "images/fanta_grape.png",
-    "レモンライムソーダ" : "images/lemon_lime_soda.png",
+    "ソーダ" : "images/soda.png",
     "緑茶" : "images/green_tea.png",
     "麦茶" : "images/barley_tea.png",
     "水" : "images/water.png",
