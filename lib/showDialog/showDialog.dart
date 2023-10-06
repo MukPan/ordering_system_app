@@ -13,43 +13,46 @@ import 'bottom.dart';
 import 'count.dart';
 
 import '../cart/cart.dart';
-import 'dialog_bottom.dart';
 
-void showCustomDialog(BuildContext context, WidgetRef ref, ItemInfo iteminfo) {
-  for (final optName
-      in iteminfo.optInfoList.map((optInfo) => optInfo.optName)) {
+
+void showCustomDialog(BuildContext context, WidgetRef ref,ItemInfo iteminfo) {
+
+  for (final optName in iteminfo.optInfoList.map((optInfo) => optInfo.optName)) {
     ref.read(optIsEnabledFamily(optName).notifier).state = false;
   }
   ref.read(counterProvider.notifier).state = 1;
 
   final int itemPrice = iteminfo.itemPrice;
 
-  //時間なくて条件分岐でゴリ押しました。すいません
-  if (iteminfo.category == "drink") {
-    final int optsPrice =
-        (iteminfo.optInfoList.isNotEmpty) //ドリンクはオプションが無いので!を消す
 
-            ? iteminfo.optInfoList
-                .map((optinfo) => optinfo.optPrice)
-                .reduce((sum, price) => sum + price)
-            : 0;
+  //時間なくて条件分岐でゴリ押しました。すいません
+  if (iteminfo.category == "drink"){
+    final int optsPrice = (iteminfo.optInfoList.isNotEmpty) //ドリンクはオプションが無いので!を消す
+
+        ? iteminfo.optInfoList
+        .map((optinfo) => optinfo.optPrice)
+        .reduce((sum, price) => sum + price)
+        : 0;
     final int amountPerItem = itemPrice + optsPrice;
     ref.read(amountPerItemProvider.notifier).state = amountPerItem;
-  } else {
-    final int optsPrice =
-        (!iteminfo.optInfoList.isNotEmpty) //!を入れることでオプションの有無しを正確な値にしている
-            ? iteminfo.optInfoList
-                .map((optinfo) => optinfo.optPrice)
-                .reduce((sum, price) => sum + price)
-            : 0;
-    final int amountPerItem = itemPrice + optsPrice;
-    ref.read(amountPerItemProvider.notifier).state = amountPerItem;
+
+  }else {final int optsPrice = (!iteminfo.optInfoList.isNotEmpty) //!を入れることでオプションの有無しを正確な値にしている
+      ? iteminfo.optInfoList
+      .map((optinfo) => optinfo.optPrice)
+      .reduce((sum, price) => sum + price)
+      : 0;
+  final int amountPerItem = itemPrice + optsPrice;
+  ref.read(amountPerItemProvider.notifier).state = amountPerItem;
   }
+
+
+
 
   final String itemName = iteminfo.itemName;
 
   final amountPer = ref.watch(amountPerItemProvider);
   final counter = ref.watch(counterProvider);
+
 
   //画面サイズ取得
   final screenWidth = MediaQuery.of(context).size.width;
@@ -58,6 +61,7 @@ void showCustomDialog(BuildContext context, WidgetRef ref, ItemInfo iteminfo) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
+
       final String itemName = iteminfo.itemName;
 
       print(itemName);
@@ -74,11 +78,9 @@ void showCustomDialog(BuildContext context, WidgetRef ref, ItemInfo iteminfo) {
         titlePadding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
         contentPadding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
         shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10.0))),
+            borderRadius: BorderRadius.all(Radius.circular(10.0))
+        ),
         //商品名
-
-        content: SingleChildScrollView(
-
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -99,112 +101,45 @@ void showCustomDialog(BuildContext context, WidgetRef ref, ItemInfo iteminfo) {
         content: SizedBox(
           width: (screenWidth * 0.7).w, //7割のサイズ
           height: (iteminfo.optInfoList.isNotEmpty)
-            ? (screenHeight * 0.75).h  //7.5割のサイズ
-            : null,
-
+              ? (screenHeight * 0.75).h  //7.5割のサイズ
+              : null,
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    //商品名
-                    Text(itemName),
-                    //バツボタン
-                    Container(
-                      margin: const EdgeInsets.only(top: 5),
-                      child: IconButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        icon: const Icon(CupertinoIcons.xmark),
-                      ),
-                    )
-                  ],
+                margin: const EdgeInsets.symmetric(horizontal: 20),
+                width: double.infinity,
+                padding: const EdgeInsets.all(15),
+                // padding: EdgeInsets.,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(10),
                 ),
+                child: ItemImg(itemName: itemName, size: 120),
               ),
-
-              SizedBox(
-                width: screenWidth * 0.7, //7割のサイズ
-                height: (iteminfo.optInfoList.isNotEmpty)
-                    ? screenHeight * 0.75 //7.5割のサイズ
-                    : null,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 20),
-                      width: double.infinity,
-                      padding: const EdgeInsets.all(15),
-                      // padding: EdgeInsets.,
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: ItemImg(itemName: itemName, size: 120),
-                    ),
-                    //見出し
-                    (iteminfo.optInfoList.isNotEmpty)
-                        ? Container(
-                            width: double.infinity,
-                            margin: const EdgeInsets.symmetric(vertical: 15),
-                            child: const Text(
-                              'トッピング',
-                              style:
-                                  TextStyle(fontSize: 20, color: Colors.grey),
-                            ),
-                          )
-                        : Container(),
-                    //オプション一覧 iteminfo.optInfoList.length
-                    (iteminfo.optInfoList.isNotEmpty)
-                        ? Expanded(
-                            child: ListView.separated(
-                              shrinkWrap: true,
-                              itemCount: iteminfo.optInfoList.length,
-                              separatorBuilder: (context, index) =>
-                                  const Divider(),
-                              itemBuilder: (BuildContext context, int index) {
-                                return OptionTile(
-                                    optInfo: iteminfo.optInfoList[index]);
-                              },
-                            ),
-                          )
-                        : const SizedBox(height: 10),
-                    const Divider(
-                      color: Colors.black,
-                    ),
-                  ],
-                ),
-              ),
-
-
-              // インデント?
-
-
               //見出し
               (iteminfo.optInfoList.isNotEmpty)
-                ? Container(
-                  width: double.infinity,
-                  margin: const EdgeInsets.symmetric(vertical: 15),
-                  child: Text(
-                    'トッピング',
-                    style: TextStyle(fontSize: 20.sp, color: Colors.grey),
-                  ),
-                ) : Container(),
+                  ? Container(
+                width: double.infinity,
+                margin: const EdgeInsets.symmetric(vertical: 15),
+                child: Text(
+                  'トッピング',
+                  style: TextStyle(fontSize: 20.sp, color: Colors.grey),
+                ),
+              ) : Container(),
               //オプション一覧 iteminfo.optInfoList.length
               (iteminfo.optInfoList.isNotEmpty)
-                ? Expanded(
-                  child:ListView.separated(
-                    shrinkWrap: true,
-                    itemCount: iteminfo.optInfoList.length,
-                    separatorBuilder: (context, index) => const Divider(),
-                    itemBuilder: (BuildContext context, int index) {
-                      return OptionTile(optInfo: iteminfo.optInfoList[index]);
-                    },
-                  ),
-                ) : const SizedBox(height: 10),
+                  ? Expanded(
+                child:ListView.separated(
+                  shrinkWrap: true,
+                  itemCount: iteminfo.optInfoList.length,
+                  separatorBuilder: (context, index) => const Divider(),
+                  itemBuilder: (BuildContext context, int index) {
+                    return OptionTile(optInfo: iteminfo.optInfoList[index]);
+                  },
+                ),
+              ) : const SizedBox(height: 10),
               const Divider(color: Colors.black,), //インデント?
-
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 10),
                 child: const Row(
