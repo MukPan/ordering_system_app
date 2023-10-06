@@ -28,10 +28,12 @@ class OptionTile extends HookConsumerWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween, // これで両端に寄せる
       children: [
         Text("$optName${(optPrice != 0) ? "(+${NumberFormat("#,###").format(optPrice)}円)" : ""}", style: TextStyle(fontSize: 15.sp),),
+
         ElevatedButton(
             style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.white, //押したときの波動色
                 backgroundColor: (isEnabled) ? Colors.orange : Colors.grey
+
             ),
             onPressed: () {
               // 1. オプションの有効/無効状態を取得
@@ -50,8 +52,9 @@ class OptionTile extends HookConsumerWidget {
             },
             child: Text(
               (isEnabled) ? "あり" : "なし",
-              style: const TextStyle(
-                color: Colors.white
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 15.sp,
               ),
             )
         ),
