@@ -60,7 +60,7 @@ class Food_page extends HookConsumerWidget {
                       child: Text(
                         foodinfo.itemName,
                         style: TextStyle(
-                          color: Colors.black,fontSize: 15.sp, //テキストの色
+                          color: Colors.black,fontSize: 12.sp, //テキストの色
                         ),
                       ),
                     ),
