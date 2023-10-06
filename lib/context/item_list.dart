@@ -85,7 +85,8 @@ class ItemList extends HookConsumerWidget {
                 ),
               ),
               //右寄り
-              Expanded(
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 5.h),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.end, //center
