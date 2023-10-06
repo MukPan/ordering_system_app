@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ItemImg extends StatelessWidget {
   const ItemImg({
@@ -27,8 +28,8 @@ class ItemImg extends StatelessWidget {
   Widget build(BuildContext context) {
     return Image.asset(
       _itemImgPathMap[itemName]!,
-      height: size,
-      width: size,
+      height: size.h,
+      width: size.w,
       colorBlendMode: BlendMode.modulate,
       color: Colors.white.withAlpha(alpha),
     );

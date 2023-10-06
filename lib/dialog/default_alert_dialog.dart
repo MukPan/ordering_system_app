@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'alert_dialog_texts.dart';
 
 class DefaultAlertDialog extends StatelessWidget {
@@ -13,11 +14,11 @@ class DefaultAlertDialog extends StatelessWidget {
     return AlertDialog(
       backgroundColor: Colors.white,
       surfaceTintColor: Colors.white,
-      titleTextStyle: const TextStyle(
-        fontSize: 30,
+      titleTextStyle: TextStyle(
+        fontSize: 30.sp,
       ),
-      contentTextStyle: const TextStyle(
-        fontSize: 20,
+      contentTextStyle: TextStyle(
+        fontSize: 20.sp,
       ),
       titlePadding: const EdgeInsets.fromLTRB(40, 30, 40, 0),
       contentPadding: const EdgeInsets.fromLTRB(40, 20, 40, 30),
@@ -35,10 +36,10 @@ class DefaultAlertDialog extends StatelessWidget {
               borderRadius: BorderRadius.circular(5),
             ),
           ),
-          child: const Text(
+          child: Text(
             "いいえ",
             style: TextStyle(
-              fontSize: 20,
+              fontSize: 20.sp,
               color: Colors.indigo,
             ),
           ),
@@ -54,10 +55,10 @@ class DefaultAlertDialog extends StatelessWidget {
                 borderRadius: BorderRadius.circular(5),
               ),
             ),
-            child: const Text(
+            child: Text(
               "はい",
               style: TextStyle(
-                fontSize: 20,
+                fontSize: 20.sp,
                 color: Colors.white
               ),
             ),

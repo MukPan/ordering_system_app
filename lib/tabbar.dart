@@ -4,6 +4,7 @@ import 'package:cash_register_app/tabpage/foofpage.dart';
 import 'package:cash_register_app/tabpage/menupage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'component/sysken_logo.dart';
 
@@ -48,9 +49,9 @@ class Tab_bar extends StatelessWidget {
               indicatorColor: Colors.orange, //選択の下線
               dividerColor: Colors.grey,
               labelColor: Colors.orange,
-              tabs: const [
-                Tab(child: Text('フード', style: TextStyle(fontWeight: FontWeight.bold))),
-                Tab(child: Text('ドリンク', style: TextStyle(fontWeight: FontWeight.bold))),
+              tabs: [
+                Tab(child: Text('フード', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.sp))),
+                Tab(child: Text('ドリンク', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.sp))),
               ],
             ),
           ),

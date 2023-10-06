@@ -2,6 +2,7 @@ import 'package:cash_register_app/provider/cart_provider.dart';
 import 'package:cash_register_app/showDialog/sub_total.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../database/item_infos.dart';
 import '../image/image_asset.dart';
@@ -64,11 +65,11 @@ void showCustomDialog(BuildContext context, WidgetRef ref, ItemInfo iteminfo) {
       return AlertDialog(
         backgroundColor: Colors.white,
         surfaceTintColor: Colors.white,
-        titleTextStyle: const TextStyle(
-          fontSize: 30,
+        titleTextStyle: TextStyle(
+          fontSize: 30.sp,
         ),
-        contentTextStyle: const TextStyle(
-          fontSize: 20,
+        contentTextStyle: TextStyle(
+          fontSize: 20.sp,
         ),
         titlePadding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
         contentPadding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
@@ -77,6 +78,30 @@ void showCustomDialog(BuildContext context, WidgetRef ref, ItemInfo iteminfo) {
         //商品名
 
         content: SingleChildScrollView(
+
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            //商品名
+            Text(itemName, style: TextStyle(fontSize: 20.sp),),
+            //バツボタン
+            Container(
+              margin: const EdgeInsets.only(top: 5),
+              child: IconButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                icon: const Icon(CupertinoIcons.xmark),
+              ),
+            )
+          ],
+        ),
+        content: SizedBox(
+          width: (screenWidth * 0.7).w, //7割のサイズ
+          height: (iteminfo.optInfoList.isNotEmpty)
+            ? (screenHeight * 0.75).h  //7.5割のサイズ
+            : null,
+
           child: Column(
             children: [
               Container(
@@ -98,6 +123,7 @@ void showCustomDialog(BuildContext context, WidgetRef ref, ItemInfo iteminfo) {
                   ],
                 ),
               ),
+
               SizedBox(
                 width: screenWidth * 0.7, //7割のサイズ
                 height: (iteminfo.optInfoList.isNotEmpty)
@@ -154,6 +180,31 @@ void showCustomDialog(BuildContext context, WidgetRef ref, ItemInfo iteminfo) {
 
               // インデント?
 
+
+              //見出し
+              (iteminfo.optInfoList.isNotEmpty)
+                ? Container(
+                  width: double.infinity,
+                  margin: const EdgeInsets.symmetric(vertical: 15),
+                  child: Text(
+                    'トッピング',
+                    style: TextStyle(fontSize: 20.sp, color: Colors.grey),
+                  ),
+                ) : Container(),
+              //オプション一覧 iteminfo.optInfoList.length
+              (iteminfo.optInfoList.isNotEmpty)
+                ? Expanded(
+                  child:ListView.separated(
+                    shrinkWrap: true,
+                    itemCount: iteminfo.optInfoList.length,
+                    separatorBuilder: (context, index) => const Divider(),
+                    itemBuilder: (BuildContext context, int index) {
+                      return OptionTile(optInfo: iteminfo.optInfoList[index]);
+                    },
+                  ),
+                ) : const SizedBox(height: 10),
+              const Divider(color: Colors.black,), //インデント?
+
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 10),
                 child: const Row(
@@ -170,8 +221,8 @@ void showCustomDialog(BuildContext context, WidgetRef ref, ItemInfo iteminfo) {
               //カートに追加ボタン
               Center(
                 child: SizedBox(
-                  width: 200, //横幅
-                  height: 50, //高さ
+                  width: 200.w, //横幅
+                  height: 50.h, //高さ
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.orange, //背景色
@@ -183,7 +234,7 @@ void showCustomDialog(BuildContext context, WidgetRef ref, ItemInfo iteminfo) {
                       cartService.addItemToCart(context, ref,iteminfo);
                       Navigator.of(context).pop();
                     },
-                    child: const Text('カートに追加', style: TextStyle(color: Colors.white, fontSize: 20)),
+                    child: Text('カートに追加', style: TextStyle(color: Colors.white, fontSize: 15.sp)),
                   ),
                 ),
               )

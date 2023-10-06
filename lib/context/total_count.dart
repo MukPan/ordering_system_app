@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../provider/item_count_family.dart';
@@ -16,7 +17,7 @@ class TotalCount extends HookConsumerWidget {
     return  Text(
       "合計 ${total_counter}個",
       style: TextStyle(
-        fontSize: 20
+        fontSize: 20.sp,
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:cash_register_app/image/image_asset.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../cart/cart.dart';
@@ -78,7 +79,7 @@ class ItemList extends HookConsumerWidget {
                     //カウンタ
                     Container(
                       margin: const EdgeInsets.only(top: 10),
-                      child: Text("個数 : $qty", style: const TextStyle(fontSize: 20),),
+                      child: Text("個数 : $qty", style: TextStyle(fontSize: 15.sp),),
                     ),
                   ],
                 ),
